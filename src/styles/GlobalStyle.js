@@ -6,7 +6,7 @@ export var GlobalStyle = createGlobalStyle`
         --gray: #777;
         --lightgray: #aaa; 
         --lightergray: #eee;
-        --white: #f5f5f5;
+        --white: #fff;
         --primary: #e87234;
     }
 

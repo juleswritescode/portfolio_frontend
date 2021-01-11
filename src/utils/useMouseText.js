@@ -37,22 +37,27 @@ export function useMouseText(text) {
   };
 
   function updateTextPosition(e) {
-    var posX, posY;
-
     {
       let screenHeight = window.innerHeight;
       let screenWidth = window.innerWidth;
-      if (e.clientX > screenWidth / 2) {
-        posX = e.clientX - 250;
+      // Adjusting the location of textelement based on where the mouse is, relative to the viewport.
+      if (e.clientX > screenWidth * 0.8) {
+        var posX = e.clientX - 250;
       } else {
-        posX = e.clientX + 50;
+        var posX = e.clientX + 50;
       }
 
       if (e.clientY > screenHeight / 5) {
-        posY = e.clientY - 70;
+        var posY = e.clientY - 70;
       } else {
-        posY = e.clientY - 10;
+        var posY = e.clientY - 10;
       }
+    }
+
+    if (!textEl.current) {
+      // Hard interrupt if textEl.current can't be located
+      setShowText(false);
+      return;
     }
 
     var textElementStyle = textEl.current.style;
@@ -60,7 +65,11 @@ export function useMouseText(text) {
     textElementStyle.left = posX + 'px';
   }
 
-  function toggleText() {
-    setShowText(show => !show);
+  function toggleText(e) {
+    if (e.type == 'mouseenter') {
+      setShowText(true);
+    } else if (e.type == 'mouseleave') {
+      setShowText(false);
+    }
   }
 }
