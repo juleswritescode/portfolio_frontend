@@ -1,4 +1,5 @@
 require('dotenv').config();
+const sanityConfig = require('./sanity-config').sanity;
 
 module.exports = {
   siteMetadata: {
@@ -20,6 +21,21 @@ module.exports = {
         short_name: 'judocodes',
         start_url: '/',
         icon: 'src/images/favicon.png',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-react-svg',
+      options: {
+        rule: {
+          include: /assets/,
+        },
+      },
+    },
+    {
+      resolve: 'gatsby-source-sanity',
+      options: {
+        ...sanityConfig,
+        watchMode: true,
       },
     },
     'gatsby-transformer-sharp',

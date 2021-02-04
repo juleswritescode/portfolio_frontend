@@ -1,73 +1,53 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useMouseText } from '../utils/useMouseText';
 import HeaderImage from '../images/header.png';
 
 var MessageStyles = styled.div`
-  position: fixed;
-  top: 50%;
-  padding: 0 15vw 0 5vw;
-  transform: translateY(-100%);
-
-  img {
-    width: clamp(100px, 100%, 950px);
-    min-width: 100px;
-    max-width: 950px;
+    position: fixed;
+    top: 50%;
+    display: flex;
+    justify-content: center;
     width: 100%;
-  }
+    padding: 0 15vw 0 5vw;
+    transform: translateY(-120%) translateX(-5%);
+
+    img {
+        width: clamp(100px, 100%, 950px);
+        min-width: 100px;
+        max-width: 950px;
+        width: 100%;
+    }
 `;
 
 var HandStyles = styled.div`
-  animation: waveHand 500ms infinite forwards;
-  transform: rotate(-10deg);
-  font-size: 2rem;
+    animation: waveHand 500ms infinite forwards;
+    transform: rotate(-10deg);
+    font-size: 2rem;
 
-  @keyframes waveHand {
-    0% {
-      transform: rotate(-10deg);
+    @keyframes waveHand {
+        0% {
+            transform: rotate(-10deg);
+        }
+        50% {
+            transform: rotate(10deg);
+        }
+        100% {
+            transform: rotate(-10deg);
+        }
     }
-    50% {
-      transform: rotate(10deg);
-    }
-    100% {
-      transform: rotate(-10deg);
-    }
-  }
 `;
 
-function WavingHand() {
-  return (
-    <HandStyles>
-      <span role="img" aria-label="waving-hand">
-        👋
-      </span>
-    </HandStyles>
-  );
-}
-
 export function WelcomeMessage() {
-  var { toggleText, updateTextPosition, FloatingText } = useMouseText(
-    <WavingHand />
-  );
-
-  return (
-    <>
-      <MessageStyles
-        onMouseEnter={toggleText}
-        onMouseLeave={toggleText}
-        onMouseMove={updateTextPosition}
-      >
-        <img
-          src={HeaderImage}
-          alt="Welcome to my page. I'm Julian, a Web Developer."
-        />
-        {/* <h3>Welcome to my page</h3>
-        <h2>I'm Julian,</h2>
-        <p>a Web Developer.</p> */}
-      </MessageStyles>
-      <FloatingText />
-    </>
-  );
+    return (
+        <>
+            <MessageStyles>
+                <img
+                    src={HeaderImage}
+                    alt="Welcome to my page. I'm Julian, a Web Developer."
+                />
+            </MessageStyles>
+        </>
+    );
 }
 
 /* h3 {

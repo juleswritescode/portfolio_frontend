@@ -2,6 +2,8 @@ import React from 'react';
 import { IoRocketSharp as Icon } from 'react-icons/io5';
 import styled from 'styled-components';
 import { useMouseText } from '../utils/useMouseText';
+import { highlightCursor } from '../utils/highlightCursor';
+import { multiple } from '../utils/utils';
 
 var IconStyles = styled.div.attrs({
   className: 'icon-corner',
@@ -18,8 +20,8 @@ export function Projects() {
   return (
     <IconStyles
       onMouseMove={updateTextPosition}
-      onMouseEnter={toggleText}
-      onMouseLeave={toggleText}
+      onMouseEnter={multiple(toggleText, highlightCursor)}
+      onMouseLeave={multiple(toggleText, highlightCursor)}
     >
       <div className="icon-wrapper">
         <Icon />

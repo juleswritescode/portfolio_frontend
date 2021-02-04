@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useMouseText } from '../utils/useMouseText';
+import { highlightCursor } from '../utils/highlightCursor';
+import { multiple } from '../utils/utils';
 
 var SocialStyles = styled.div`
   padding: 0;
@@ -12,7 +14,6 @@ var SocialStyles = styled.div`
     right: 25px;
     display: flex;
     flex-direction: column;
-    cursor: pointer;
   }
 
   li {
@@ -35,8 +36,8 @@ export function SocialLinks() {
   return (
     <SocialStyles>
       <ul
-        onMouseEnter={toggleText}
-        onMouseLeave={toggleText}
+        onMouseEnter={multiple(toggleText, highlightCursor)}
+        onMouseLeave={multiple(toggleText, highlightCursor)}
         onMouseMove={updateTextPosition}
       >
         <li>

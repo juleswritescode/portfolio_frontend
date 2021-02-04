@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 
-var TextElementStyle = styled.p`
+var TextElementStyle = styled.div`
   position: fixed;
   padding: 0 1rem;
   width: 200px;
@@ -37,20 +37,22 @@ export function useMouseText(text) {
   };
 
   function updateTextPosition(e) {
+    var posX, posY;
+
     {
       let screenHeight = window.innerHeight;
       let screenWidth = window.innerWidth;
       // Adjusting the location of textelement based on where the mouse is, relative to the viewport.
       if (e.clientX > screenWidth * 0.8) {
-        var posX = e.clientX - 250;
+        posX = e.clientX - 250;
       } else {
-        var posX = e.clientX + 50;
+        posX = e.clientX + 50;
       }
 
       if (e.clientY > screenHeight / 5) {
-        var posY = e.clientY - 70;
+        posY = e.clientY - 70;
       } else {
-        var posY = e.clientY - 10;
+        posY = e.clientY - 10;
       }
     }
 
@@ -61,8 +63,10 @@ export function useMouseText(text) {
     }
 
     var textElementStyle = textEl.current.style;
-    textElementStyle.top = posY + 'px';
-    textElementStyle.left = posX + 'px';
+    setTimeout(() => {
+      textElementStyle.top = posY + 'px';
+      textElementStyle.left = posX + 'px';
+    }, 0);
   }
 
   function toggleText(e) {

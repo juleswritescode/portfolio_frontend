@@ -5,18 +5,26 @@ export var GlobalStyle = createGlobalStyle`
         --black: #333;
         --gray: #777;
         --lightgray: #aaa; 
-        --lightergray: #eee;
+        --lightergray: hsla(0, 0%, 93%, .5);
         --white: #fff;
         --primary: #e87234;
+        --inner-mouse: #777;
+        --outer-mouse: #aaa;
+        --outer-mouse-size: 25px;
     }
 
     html {
         font-size: 18px;
     }
+
+    * {
+        cursor: none !important;
+    }
     
     body {
         background-color: var(--white);
         letter-spacing: 0.05rem;
+        overflow-x: hidden;
     }
 
     ul {
@@ -29,7 +37,6 @@ export var GlobalStyle = createGlobalStyle`
     }
 
     svg {
-        cursor: pointer;
         font-size: 2rem;
         color: var(--black);
         &:hover {
