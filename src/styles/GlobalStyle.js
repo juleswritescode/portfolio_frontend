@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components';
 export var GlobalStyle = createGlobalStyle`
     :root {
         --black: #333;
+        --darkgray: #555;
         --gray: #777;
         --lightgray: #aaa; 
         --lightergray: hsla(0, 0%, 93%, .5);
@@ -24,7 +25,7 @@ export var GlobalStyle = createGlobalStyle`
     body {
         background-color: var(--white);
         letter-spacing: 0.05rem;
-        overflow-x: hidden;
+        /* overflow-x: hidden; */
     }
 
     ul {
@@ -38,11 +39,17 @@ export var GlobalStyle = createGlobalStyle`
 
     svg {
         font-size: 2rem;
-        color: var(--black);
+        color: var(--darkgray);
         &:hover {
             color: var(--primary);
         }
     }
     
+    .gatsby-image-wrapper, img {
+        user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -webkit-user-drag: none;
+    }
     
 `;

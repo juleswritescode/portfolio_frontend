@@ -1,67 +1,84 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useMouseText } from '../utils/useMouseText';
-import { highlightCursor } from '../utils/highlightCursor';
+import {
+    highlightCursor,
+    removeHighlightEffect,
+} from '../utils/highlightCursor';
 import { multiple } from '../utils/utils';
 
 var SocialStyles = styled.div`
-  padding: 0;
-
-  ul {
+    padding: 0;
+    bottom: 0;
+    left: 50%;
     position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
-    right: 25px;
-    display: flex;
-    flex-direction: column;
-  }
 
-  li {
-    transform: rotate(-30deg);
-    color: var(--lightgray);
-    margin: 0.5rem 0;
-    transition: 50ms;
-    &:hover {
-      color: var(--primary);
-      transform: rotate(0deg);
+    ul {
+        transform: translateX(-60%);
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        padding-bottom: 2rem;
     }
-  }
+
+    li {
+        transform-origin: center;
+        text-align: center;
+        transform: rotate(-30deg);
+        color: var(--lightgray);
+        width: 2rem;
+        padding: 1rem;
+        transition: 50ms;
+        &:hover {
+            color: var(--primary);
+            transform: rotate(0deg);
+        }
+        &:first-child {
+            margin-bottom: -5px;
+        }
+        &:last-child {
+            margin-bottom: 3px;
+        }
+    }
 `;
 
 export function SocialLinks() {
-  var { toggleText, FloatingText, updateTextPosition } = useMouseText(
-    'Visit my social media or github.'
-  );
+    var { hideText, showText, FloatingText, updateTextPosition } = useMouseText(
+        'Visit my social media or github.'
+    );
 
-  return (
-    <SocialStyles>
-      <ul
-        onMouseEnter={multiple(toggleText, highlightCursor)}
-        onMouseLeave={multiple(toggleText, highlightCursor)}
-        onMouseMove={updateTextPosition}
-      >
-        <li>
-          <a target="_blank" href="https://www.github.com/judocodes">
-            ghub
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://www.twitter.com/judocodes">
-            twtr
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://www.linkedin.com/in/judocodes">
-            lkdn
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://www.instagram.com/julian.domke">
+    return (
+        <SocialStyles>
+            <ul
+                onMouseEnter={multiple(showText, highlightCursor)}
+                onMouseLeave={multiple(hideText, removeHighlightEffect)}
+                onMouseMove={updateTextPosition}
+            >
+                <li>
+                    <a target="_blank" href="https://www.github.com/judocodes">
+                        ghub
+                    </a>
+                </li>
+                <li>
+                    <a target="_blank" href="https://www.twitter.com/judocodes">
+                        twtr
+                    </a>
+                </li>
+                <li>
+                    <a
+                        target="_blank"
+                        href="https://www.linkedin.com/in/judocodes"
+                    >
+                        lkdn
+                    </a>
+                </li>
+                {/* <li>
+        <a target="_blank" href="https://www.instagram.com/julian.domke">
             ingr
           </a>
-        </li>
-      </ul>
-      <FloatingText />
-    </SocialStyles>
-  );
+        </li> */}
+            </ul>
+            <FloatingText />
+        </SocialStyles>
+    );
 }

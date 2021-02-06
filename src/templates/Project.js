@@ -1,18 +1,15 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 import { BiArrowBack as Icon } from 'react-icons/bi';
-import BlockContent from '@sanity/block-content-to-react';
+import styled from 'styled-components';
 import {
     highlightCursor,
     removeHighlightEffect,
 } from '../utils/highlightCursor';
-import { BlogPostImage } from '../components/BlogPostImage';
-import { Quote } from '../components/Quote';
-import styled from 'styled-components';
 import Img from 'gatsby-image';
-import { format } from 'date-fns';
+import Markdown from 'react-markdown';
 
-var BlogPostStyles = styled.div`
+var ProjectStyles = styled.div`
     max-width: 700px;
     padding: 4rem 1rem;
     margin: 0 auto;
@@ -42,6 +39,15 @@ var BlogPostStyles = styled.div`
         }
     }
 
+    .links {
+        a {
+            margin: 0 10px;
+            &:hover {
+                color: var(--primary);
+            }
+        }
+    }
+
     hr {
         border-color: var(--lightergray);
         margin: 1rem 0;
@@ -59,28 +65,31 @@ var BlogPostStyles = styled.div`
     }
 `;
 
-var serializers = {
-    types: {
-        mainImage: ({ node }) => {
-            return <BlogPostImage node={node} />;
-        },
-        code: ({ node }) => {
-            return <pre>{node.code}</pre>;
-        },
-        quote: ({ node }) => {
-            return <Quote node={node} />;
-        },
-    },
-};
-
 export default function BlogPost({ data = {} }) {
-    var { body, mainImage, title, publishedAt } = data.post || {};
+    console.log({ data });
+    var { description, mainImage, title, github, link } = data.project || {};
+    console.log(description);
     return (
-        <BlogPostStyles>
+        <ProjectStyles>
             <h2>
-                {title}{' '}
-                <span className="published">
-                    {format(new Date(publishedAt), "EEE', 'do' of 'MMMM")}
+                {title}
+                <span className="links">
+                    <a
+                        target="_blank"
+                        onMouseEnter={highlightCursor}
+                        onMouseLeave={removeHighlightEffect}
+                        href={link}
+                    >
+                        Visit Project
+                    </a>
+                    <a
+                        target="_blank"
+                        href={github}
+                        onMouseEnter={highlightCursor}
+                        onMouseLeave={removeHighlightEffect}
+                    >
+                        Github
+                    </a>
                 </span>
             </h2>
             <hr />
@@ -88,7 +97,7 @@ export default function BlogPost({ data = {} }) {
                 <Link
                     to="/"
                     onMouseEnter={highlightCursor}
-                    onMouseLeave={removeHighlightEffect}
+                    onMouseLeave={highlightCursor}
                 >
                     <Icon />
                 </Link>
@@ -98,16 +107,15 @@ export default function BlogPost({ data = {} }) {
                 alt={mainImage?.alt}
                 title={mainImage?.caption}
             />
-            <BlockContent blocks={body} serializers={serializers} />
-        </BlogPostStyles>
+            <Markdown>{description}</Markdown>
+        </ProjectStyles>
     );
 }
 
 export const pageQuery = graphql`
     query($id: String) {
-        post: sanityPost(id: { eq: $id }) {
+        project: sanityProject(id: { eq: $id }) {
             id
-            body: _rawBody
             mainImage {
                 asset {
                     fluid(maxWidth: 800) {
@@ -120,8 +128,10 @@ export const pageQuery = graphql`
             slug {
                 current
             }
+            description
             title
-            publishedAt
+            github
+            link
         }
     }
 `;

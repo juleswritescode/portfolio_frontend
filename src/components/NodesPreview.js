@@ -3,19 +3,20 @@ import { format } from 'date-fns';
 import { Link } from 'gatsby';
 import styled from 'styled-components';
 import Img from 'gatsby-image';
-import { highlightCursor } from '../utils/highlightCursor';
+import {
+    highlightCursor,
+    removeHighlightEffect,
+} from '../utils/highlightCursor';
 
-var PostsStyles = styled.div`
+var NodesStyles = styled.div`
+    padding-top: 6rem;
     display: flex;
-    position: fixed;
     width: 100%;
     justify-content: center;
     align-items: center;
-    bottom: 0;
-    padding-bottom: 4rem;
 `;
 
-var SinglePostStyles = styled.div`
+var SingleNodeStyles = styled.div`
     margin: 0 50px;
     animation: fadeIn forwards ease-in;
     animation-duration: ${({ idx }) => idx * 200 + 'ms'};
@@ -30,6 +31,7 @@ var SinglePostStyles = styled.div`
         margin: 0;
     }
     .gatsby-image-wrapper {
+        box-shadow: 0 3px 3px rgba(0, 0, 0, 0.25);
         width: 200px;
         height: 200px;
         border-radius: 25px;
@@ -48,32 +50,37 @@ var SinglePostStyles = styled.div`
     }
 `;
 
-export function PostsPreview({ posts }) {
+export function NodesPreview({ nodes }) {
     return (
-        <PostsStyles>
-            {posts.slice(0, 3).map(function renderSinglePost(post, idx) {
+        <NodesStyles>
+            {nodes.slice(0, 3).map(function renderSingleNode(node, idx) {
                 return (
-                    <SinglePostPreview post={post} idx={idx} key={post.id} />
+                    <SingleNodePreview node={node} idx={idx} key={node.id} />
                 );
             })}
-        </PostsStyles>
+        </NodesStyles>
     );
 }
 
-function SinglePostPreview({ post, idx }) {
+function SingleNodePreview({ node, idx }) {
+    var base = node.publishedAt ? 'post' : 'project';
     return (
-        <Link to={`/post/${post.slug.current}`}>
-            <SinglePostStyles
+        <Link to={`/${base}/${node.slug.current}`}>
+            <SingleNodeStyles
                 idx={idx}
-                onMouseLeave={highlightCursor}
                 onMouseEnter={highlightCursor}
+                onMouseLeave={removeHighlightEffect}
             >
-                <Img fluid={post.mainImage.asset.fluid} />
-                <h4>{post.title}</h4>
+                <Img fluid={node.mainImage?.asset?.fluid} />
+                <h4>{node.title}</h4>
                 <p>
-                    {format(new Date(post.publishedAt), "EEE', 'do' of 'MMMM")}
+                    {node.publishedAt &&
+                        format(
+                            new Date(node.publishedAt),
+                            "EEE', 'do' of 'MMMM"
+                        )}
                 </p>
-            </SinglePostStyles>
+            </SingleNodeStyles>
         </Link>
     );
 }

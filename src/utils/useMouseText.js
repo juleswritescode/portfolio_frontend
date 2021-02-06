@@ -1,79 +1,85 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 
+var cachedPosition = {
+    top: 0,
+    left: 0,
+};
+
 var TextElementStyle = styled.div`
-  position: fixed;
-  padding: 0 1rem;
-  width: 200px;
-  top: 0;
-  left: 0;
-  text-align: center;
-  color: var(--gray);
+    position: fixed;
+    padding: 0 1rem;
+    top: ${cachedPosition.top};
+    left: ${cachedPosition.left};
+    width: 200px;
+    transform: translateX(-50%);
+    text-align: center;
+    color: var(--gray);
 
-  animation: fadeIn 200ms forwards;
+    animation: fadeIn 200ms forwards;
 
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
-    to {
-      opacity: 1;
-    }
-  }
 `;
 
 export function useMouseText(text) {
-  var [showText, setShowText] = useState(false);
-  var textEl = useRef(null);
+    var [show, setShow] = useState(false);
+    var [position, setPosition] = useState({
+        top: 0,
+        left: 0,
+    });
+    var textEl = useRef(null);
 
-  var FloatingText = function createTextElementWithRef() {
-    return showText && <TextElementStyle ref={textEl}>{text}</TextElementStyle>;
-  };
-
-  return {
-    FloatingText,
-    updateTextPosition,
-    toggleText,
-  };
-
-  function updateTextPosition(e) {
-    var posX, posY;
-
-    {
-      let screenHeight = window.innerHeight;
-      let screenWidth = window.innerWidth;
-      // Adjusting the location of textelement based on where the mouse is, relative to the viewport.
-      if (e.clientX > screenWidth * 0.8) {
-        posX = e.clientX - 250;
-      } else {
-        posX = e.clientX + 50;
-      }
-
-      if (e.clientY > screenHeight / 5) {
-        posY = e.clientY - 70;
-      } else {
-        posY = e.clientY - 10;
-      }
+    function FloatingText() {
+        return show && <TextElementStyle ref={textEl}>{text}</TextElementStyle>;
     }
 
-    if (!textEl.current) {
-      // Hard interrupt if textEl.current can't be located
-      setShowText(false);
-      return;
+    return {
+        FloatingText,
+        updateTextPosition,
+        showText,
+        hideText,
+    };
+
+    function updateTextPosition(e) {
+        var posX, posY;
+
+        {
+            let screenHeight = window.innerHeight;
+            // Adjusting the location of textelement based on where the mouse is, relative to the viewport.
+
+            posX = e.clientX;
+            if (e.clientY > screenHeight * 0.8) {
+                posY = e.clientY - 120;
+            } else {
+                posY = e.clientY + 60;
+            }
+        }
+
+        if (!textEl.current) {
+            // Hard interrupt if textEl.current can't be located
+            setShow(false);
+            return;
+        }
+
+        var textElementStyle = textEl.current.style;
+        setTimeout(() => {
+            textElementStyle.top = posY + 'px';
+            textElementStyle.left = posX + 'px';
+        }, 0);
     }
 
-    var textElementStyle = textEl.current.style;
-    setTimeout(() => {
-      textElementStyle.top = posY + 'px';
-      textElementStyle.left = posX + 'px';
-    }, 0);
-  }
-
-  function toggleText(e) {
-    if (e.type == 'mouseenter') {
-      setShowText(true);
-    } else if (e.type == 'mouseleave') {
-      setShowText(false);
+    function showText(e) {
+        setShow(true);
     }
-  }
+
+    function hideText(e) {
+        setShow(false);
+    }
 }

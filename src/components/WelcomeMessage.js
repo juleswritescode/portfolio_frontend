@@ -3,18 +3,16 @@ import styled from 'styled-components';
 import HeaderImage from '../images/header.png';
 
 var MessageStyles = styled.div`
-    position: fixed;
-    top: 50%;
+    padding-top: 2rem;
+    margin: 0 auto;
     display: flex;
     justify-content: center;
-    width: 100%;
-    padding: 0 15vw 0 5vw;
-    transform: translateY(-120%) translateX(-5%);
+    width: auto;
 
     img {
+        object-fit: contain;
         width: clamp(100px, 100%, 950px);
         min-width: 100px;
-        max-width: 950px;
         width: 100%;
     }
 `;

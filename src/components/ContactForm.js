@@ -1,7 +1,10 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
-import { highlightCursor } from '../utils/highlightCursor';
+import {
+    highlightCursor,
+    removeHighlightEffect,
+} from '../utils/highlightCursor';
 
 var FormStyles = styled.form`
     display: flex;
@@ -64,7 +67,7 @@ export function ContactForm() {
                 Name
                 <input
                     onMouseEnter={highlightCursor}
-                    onMouseLeave={highlightCursor}
+                    onMouseLeave={removeHighlightEffect}
                     type="text"
                     name="name"
                     id="name"
@@ -75,7 +78,7 @@ export function ContactForm() {
                 Email
                 <input
                     onMouseEnter={highlightCursor}
-                    onMouseLeave={highlightCursor}
+                    onMouseLeave={removeHighlightEffect}
                     type="text"
                     name="email"
                     id="email"
@@ -86,7 +89,7 @@ export function ContactForm() {
                 Subject
                 <input
                     onMouseEnter={highlightCursor}
-                    onMouseLeave={highlightCursor}
+                    onMouseLeave={removeHighlightEffect}
                     type="text"
                     name="subject"
                     id="subject"
@@ -97,7 +100,7 @@ export function ContactForm() {
                 Message
                 <textarea
                     onMouseEnter={highlightCursor}
-                    onMouseLeave={highlightCursor}
+                    onMouseLeave={removeHighlightEffect}
                     rows="15"
                     name="body"
                     id="body"
@@ -106,7 +109,7 @@ export function ContactForm() {
             </label>
             <button
                 onMouseEnter={highlightCursor}
-                onMouseLeave={highlightCursor}
+                onMouseLeave={removeHighlightEffect}
                 type="submit"
             >
                 Send Email
