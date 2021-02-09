@@ -7,7 +7,7 @@ import {
     removeHighlightEffect,
 } from '../../utils/highlightCursor';
 
-var ContactInfoStyles = styled.form`
+var ContactInfoStyles = styled.div`
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
@@ -56,12 +56,12 @@ var ContactInfoStyles = styled.form`
 `;
 
 export function ContactInfo({ setTextWritten, formData }) {
-    var { register, watch, errors } = useFormContext();
+    var { register, watch } = useFormContext();
 
-    useEffect(function updateFormValues() {
+    useEffect(function updateFormData() {
         if (formData.current) {
-            formData.current.name = watch('name');
             formData.current.email = watch('email');
+            formData.current.name = watch('name');
             formData.current.subject = watch('subject');
         }
     });
@@ -89,7 +89,11 @@ export function ContactInfo({ setTextWritten, formData }) {
                         type="text"
                         id="email"
                         name="email"
-                        ref={register({ required: true, maxLength: 144 })}
+                        ref={register({
+                            required: true,
+                            maxLength: 144,
+                            validate: validator.isEmail,
+                        })}
                         defaultValue={formData.current.email}
                     />
                 </label>
@@ -102,7 +106,6 @@ export function ContactInfo({ setTextWritten, formData }) {
                         ref={register({
                             required: true,
                             maxLength: 144,
-                            validate: validator.isEmail,
                         })}
                         onMouseEnter={highlightCursor}
                         onMouseLeave={removeHighlightEffect}
@@ -112,8 +115,8 @@ export function ContactInfo({ setTextWritten, formData }) {
             </div>
             <div className="buttons">
                 <button
+                    type="submit"
                     className="btn"
-                    onSubmit={() => {}}
                     onMouseEnter={highlightCursor}
                     onMouseLeave={removeHighlightEffect}
                 >

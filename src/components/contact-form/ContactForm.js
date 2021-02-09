@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import styled from 'styled-components';
 import { Textarea } from './Textarea';
@@ -9,7 +9,7 @@ import {
     removeHighlightEffect,
 } from '../../utils/highlightCursor';
 
-var FormStyles = styled.div`
+var FormStyles = styled.form`
     padding-top: 3rem;
     padding-bottom: 4rem;
     animation: fadeInForm forwards ease-in;
@@ -45,6 +45,14 @@ var FormStyles = styled.div`
         }
     }
 
+    .error {
+        width: 100%;
+        color: red;
+        font-weight: 700;
+        text-align: center;
+        padding: 1rem 0;
+    }
+
     @keyframes fadeInForm {
         from {
             transform: translateX(-50%);
@@ -71,10 +79,16 @@ export function ContactForm({ updater }) {
     });
     // register, handleSubmit, watch, errors
     var formHandle = useForm(formData.current);
+    var { handleSubmit, errors } = formHandle;
 
     return (
         <FormProvider {...formHandle}>
-            <FormStyles>
+            <FormStyles
+                onSubmit={handleSubmit(
+                    () => {},
+                    () => {}
+                )}
+            >
                 <div
                     className="close-contact"
                     onClick={updater}
@@ -83,6 +97,12 @@ export function ContactForm({ updater }) {
                 >
                     <Icon />
                 </div>
+                {(errors.body ||
+                    errors.email ||
+                    errors.name ||
+                    errors.subject) && (
+                    <p className="error">{handleErrors(errors)}</p>
+                )}
                 {!textWritten && (
                     <Textarea
                         setTextWritten={setTextWritten}
@@ -99,4 +119,41 @@ export function ContactForm({ updater }) {
             </FormStyles>
         </FormProvider>
     );
+
+    function handleErrors(error) {
+        if (error.body) {
+            setTextWritten(false);
+            switch (error.body.type) {
+                case 'required':
+                    return 'Please provide a message.';
+                case 'minLength':
+                    return 'Please provide a meaningful message.';
+            }
+        } else if (error.name) {
+            switch (error.name.type) {
+                case 'required':
+                    return 'Please provide a name.';
+                case 'maxLength':
+                    return 'Your name is too long.';
+            }
+        } else if (error.email) {
+            switch (error.email.type) {
+                case 'required':
+                    return 'Please provide an email.';
+                case 'maxLength':
+                    return 'Your email is too long.';
+                case 'validate':
+                    return 'Please provide a valid email.';
+            }
+        } else if (error.subject) {
+            switch (error.subject.type) {
+                case 'required':
+                    return 'Please provide a subject.';
+                case 'maxLength':
+                    return 'Please shorten your subject.';
+            }
+        } else {
+            return 'Something went wrong with your errors...';
+        }
+    }
 }

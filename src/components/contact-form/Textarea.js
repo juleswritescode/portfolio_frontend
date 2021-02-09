@@ -25,9 +25,9 @@ var TextAreaStyles = styled.div`
 `;
 
 export function Textarea({ setTextWritten, formData }) {
-    var { register, watch } = useFormContext();
+    var { register, watch, errors, handleSubmit } = useFormContext();
 
-    useEffect(function updateTextareaValue() {
+    useEffect(function updateFormData() {
         if (formData.current) {
             formData.current.body = watch('body');
         }
@@ -42,12 +42,16 @@ export function Textarea({ setTextWritten, formData }) {
                 name="body"
                 id="body"
                 cols="30"
-                ref={register({ required: true })}
+                ref={register({
+                    required: true,
+                    minLength: 50,
+                })}
                 rows="10"
                 defaultValue={formData.current.body}
             ></textarea>
             <button
                 className="btn"
+                // handleSubmit will error because the other fields haven't been set. We need to check if we should proceed in the onError callback
                 onClick={() => setTextWritten(true)}
                 onMouseEnter={highlightCursor}
                 onMouseLeave={removeHighlightEffect}
