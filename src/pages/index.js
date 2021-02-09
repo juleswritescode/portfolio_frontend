@@ -9,6 +9,7 @@ import { Projects } from '../components/Projects';
 import { WelcomeMessage } from '../components/WelcomeMessage';
 import { NodesPreview } from '../components/NodesPreview';
 import { graphql } from 'gatsby';
+import { ContactForm } from '../components/contact-form/ContactForm';
 import styled from 'styled-components';
 
 var Wrapper = styled.div`
@@ -57,11 +58,14 @@ export default function Index({ data = {} }) {
                     />
                     <Writing updater={updater('posts')} isOpen={showPosts} />
                     <MusicHobby />
-                    <Contact />
+                    <Contact
+                        updater={updater('contact')}
+                        isOpen={showContact}
+                    />
                 </IconStyles>
                 {showProjects && <NodesPreview nodes={projects} />}
                 {showPosts && <NodesPreview nodes={posts} />}
-                {showContact && <p>PopelContact</p>}
+                {showContact && <ContactForm updater={updater('contact')} />}
             </Wrapper>
             <SocialLinks />
         </>
@@ -71,11 +75,16 @@ export default function Index({ data = {} }) {
         return () => {
             if (string == 'posts') {
                 setShowPosts(o => !o);
+                setShowContact(false);
                 setShowProjects(false);
             } else if (string == 'projects') {
                 setShowProjects(o => !o);
+                setShowContact(false);
                 setShowPosts(false);
-            } else if (false) {
+            } else if (string == 'contact') {
+                setShowContact(o => !o);
+                setShowPosts(false);
+                setShowProjects(false);
             }
         };
     }
