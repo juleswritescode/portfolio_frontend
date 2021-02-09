@@ -42,10 +42,9 @@ var SocialStyles = styled.div`
     }
 
     @media (max-width: 768px) {
-        bottom: 50%;
         left: unset;
         right: 1rem;
-        bottom: 3rem;
+        bottom: 6rem;
 
         ul {
             transform: translateX(0);

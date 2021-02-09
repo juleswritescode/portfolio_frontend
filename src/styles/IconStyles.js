@@ -20,8 +20,8 @@ export var IconStyles = createGlobalStyle`
     .icon-description {
       display: none;
       text-transform: uppercase;
-      font-weight: 200;
-      color: var(--gray);
+      font-weight: 300;
+      color: var(--primary);
       margin-top: 1rem;
       margin-bottom: .5rem;
       font-size: .8rem;

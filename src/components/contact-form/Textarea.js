@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
+import { useFormContext } from 'react-hook-form';
 import {
     highlightCursor,
     removeHighlightEffect,
 } from '../../utils/highlightCursor';
 
 var TextAreaStyles = styled.div`
-    animation: fadeInForm 300ms ease-in;
     textarea {
         width: 100%;
         height: 100%;
@@ -24,8 +24,15 @@ var TextAreaStyles = styled.div`
     }
 `;
 
-export function Textarea({ formHandle, setTextWritten }) {
-    var { register, errors } = formHandle;
+export function Textarea({ setTextWritten, formData }) {
+    var { register, watch } = useFormContext();
+
+    useEffect(function updateTextareaValue() {
+        if (formData.current) {
+            formData.current.body = watch('body');
+        }
+    });
+
     return (
         <TextAreaStyles>
             <textarea
@@ -37,6 +44,7 @@ export function Textarea({ formHandle, setTextWritten }) {
                 cols="30"
                 ref={register({ required: true })}
                 rows="10"
+                defaultValue={formData.current.body}
             ></textarea>
             <button
                 className="btn"

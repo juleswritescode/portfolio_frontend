@@ -15,25 +15,43 @@ var MessageStyles = styled.div`
         min-width: 100px;
     }
     @media (max-width: 768px) {
-        padding-top: 2rem;
+        display: none;
     }
 `;
 
-var HandStyles = styled.div`
-    animation: waveHand 500ms infinite forwards;
-    transform: rotate(-10deg);
-    font-size: 2rem;
+var MobileMessageStyles = styled.div`
+    padding-top: 1.5rem;
+    text-align: center;
+    width: 100%;
 
-    @keyframes waveHand {
-        0% {
-            transform: rotate(-10deg);
-        }
-        50% {
-            transform: rotate(10deg);
-        }
-        100% {
-            transform: rotate(-10deg);
-        }
+    h1,
+    h2,
+    h3 {
+        margin-bottom: 0.2rem;
+    }
+
+    h3 {
+        color: var(--primary);
+        font-weight: 500;
+    }
+
+    h2 {
+        color: var(--darkgray);
+    }
+
+    h1 {
+        color: var(--black);
+        line-height: 1;
+    }
+
+    hr {
+        margin: 1rem 0;
+        opacity: 0.75;
+        border: 0.5px solid var(--lightgray);
+    }
+
+    @media (min-width: 768px) {
+        display: none;
     }
 `;
 
@@ -46,6 +64,15 @@ export function WelcomeMessage() {
                     alt="Welcome to my page. I'm Julian, a Web Developer."
                 />
             </MessageStyles>
+            <MobileMessageStyles>
+                <h3>Welcome to my Page</h3>
+                {/* <h1>
+                    &lt;<span>Julian Domke</span>/&gt;
+                </h1> */}
+                <h1>Julian Domke</h1>
+                <h2>Web Developer</h2>
+                <hr />
+            </MobileMessageStyles>
         </>
     );
 }

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import validator from 'validator';
+import { useFormContext } from 'react-hook-form';
 import {
     highlightCursor,
     removeHighlightEffect,
@@ -48,14 +49,22 @@ var ContactInfoStyles = styled.form`
         }
     }
 
-    a.btn {
+    span.btn {
         display: inline-block;
         margin-left: 1rem;
     }
 `;
 
-export function ContactInfo({ formHandle, setTextWritten }) {
-    var { register, errors } = formHandle;
+export function ContactInfo({ setTextWritten, formData }) {
+    var { register, watch, errors } = useFormContext();
+
+    useEffect(function updateFormValues() {
+        if (formData.current) {
+            formData.current.name = watch('name');
+            formData.current.email = watch('email');
+            formData.current.subject = watch('subject');
+        }
+    });
 
     return (
         <ContactInfoStyles>
@@ -64,18 +73,24 @@ export function ContactInfo({ formHandle, setTextWritten }) {
                     <span>Your Name</span>
                     <input
                         type="text"
+                        onMouseEnter={highlightCursor}
+                        onMouseLeave={removeHighlightEffect}
                         id="name"
                         name="name"
                         ref={register({ required: true, maxLength: 144 })}
+                        defaultValue={formData.current.name}
                     />
                 </label>
                 <label htmlFor="email">
                     <span>Your Email</span>
                     <input
+                        onMouseEnter={highlightCursor}
+                        onMouseLeave={removeHighlightEffect}
                         type="text"
                         id="email"
                         name="email"
                         ref={register({ required: true, maxLength: 144 })}
+                        defaultValue={formData.current.email}
                     />
                 </label>
                 <label htmlFor="subject">
@@ -89,16 +104,29 @@ export function ContactInfo({ formHandle, setTextWritten }) {
                             maxLength: 144,
                             validate: validator.isEmail,
                         })}
+                        onMouseEnter={highlightCursor}
+                        onMouseLeave={removeHighlightEffect}
+                        defaultValue={formData.current.subject}
                     />
                 </label>
             </div>
             <div className="buttons">
-                <button className="btn" onSubmit={() => {}}>
+                <button
+                    className="btn"
+                    onSubmit={() => {}}
+                    onMouseEnter={highlightCursor}
+                    onMouseLeave={removeHighlightEffect}
+                >
                     Message Me
                 </button>
-                <a onClick={() => setTextWritten(false)} className="btn">
-                    Change Text...
-                </a>
+                <span
+                    onMouseEnter={highlightCursor}
+                    onMouseLeave={removeHighlightEffect}
+                    onClick={() => setTextWritten(false)}
+                    className="btn"
+                >
+                    Review Text...
+                </span>
             </div>
         </ContactInfoStyles>
     );

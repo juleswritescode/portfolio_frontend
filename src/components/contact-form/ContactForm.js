@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useState, useRef } from 'react';
+import { useForm, FormProvider } from 'react-hook-form';
 import styled from 'styled-components';
 import { Textarea } from './Textarea';
 import { ContactInfo } from './ContactInfo';
@@ -63,38 +63,40 @@ var FormStyles = styled.div`
 
 export function ContactForm({ updater }) {
     var [textWritten, setTextWritten] = useState(false);
-    // register, handleSubmit, watch, errors
-    var formHandle = useForm({
+    var formData = useRef({
         name: '',
         email: '',
         subject: '',
         body: '',
     });
-
-    console.log(formHandle);
+    // register, handleSubmit, watch, errors
+    var formHandle = useForm(formData.current);
 
     return (
-        <FormStyles>
-            <div
-                className="close-contact"
-                onClick={updater}
-                onMouseEnter={highlightCursor}
-                onMouseLeave={removeHighlightEffect}
-            >
-                <Icon />
-            </div>
-            {!textWritten && (
-                <Textarea
-                    formHandle={formHandle}
-                    setTextWritten={setTextWritten}
-                />
-            )}
-            {textWritten && (
-                <ContactInfo
-                    setTextWritten={setTextWritten}
-                    formHandle={formHandle}
-                />
-            )}
-        </FormStyles>
+        <FormProvider {...formHandle}>
+            <FormStyles>
+                <div
+                    className="close-contact"
+                    onClick={updater}
+                    onMouseEnter={highlightCursor}
+                    onMouseLeave={removeHighlightEffect}
+                >
+                    <Icon />
+                </div>
+                {!textWritten && (
+                    <Textarea
+                        setTextWritten={setTextWritten}
+                        formData={formData}
+                    />
+                )}
+
+                {textWritten && (
+                    <ContactInfo
+                        setTextWritten={setTextWritten}
+                        formData={formData}
+                    />
+                )}
+            </FormStyles>
+        </FormProvider>
     );
 }
