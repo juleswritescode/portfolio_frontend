@@ -18,7 +18,7 @@ var SocialStyles = styled.div`
         display: flex;
         gap: 1rem;
         align-items: center;
-        padding-bottom: 2rem;
+        padding-bottom: 1rem;
     }
 
     li {
@@ -38,6 +38,26 @@ var SocialStyles = styled.div`
         }
         &:last-child {
             margin-bottom: 3px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        bottom: 50%;
+        left: unset;
+        right: 1rem;
+        bottom: 3rem;
+
+        ul {
+            transform: translateX(0);
+            flex-direction: column;
+            gap: 2rem;
+            padding-bottom: 0rem;
+            font-size: var(--fonts);
+
+            li {
+                width: auto;
+                padding: 0;
+            }
         }
     }
 `;

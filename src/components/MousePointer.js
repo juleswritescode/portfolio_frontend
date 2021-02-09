@@ -8,6 +8,10 @@ var MousePointerStyles = styled.div`
     z-index: 999;
     pointer-events: none;
 
+    @media (max-width: 1024px) {
+        display: none;
+    }
+
     .outer {
         display: flex;
         justify-content: center;

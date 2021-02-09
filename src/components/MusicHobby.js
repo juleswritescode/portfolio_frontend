@@ -17,17 +17,23 @@ export function MusicHobby() {
         'I make music, too.'
     );
     return (
-        <IconStyles
-            onMouseMove={updateTextPosition}
-            onMouseEnter={multiple(showText, highlightCursor)}
-            onMouseLeave={multiple(hideText, removeHighlightEffect)}
-        >
-            <a href="https://www.instagram.com/julian.domke" target="_blank">
-                <div className="icon-wrapper">
-                    <Icon />
-                </div>
-            </a>
+        <>
+            <IconStyles
+                onMouseMove={updateTextPosition}
+                onMouseEnter={multiple(showText, highlightCursor)}
+                onMouseLeave={multiple(hideText, removeHighlightEffect)}
+            >
+                <a
+                    href="https://www.instagram.com/julian.domke"
+                    target="_blank"
+                >
+                    <div className="icon-wrapper">
+                        <span className="icon-description">Music</span>
+                        <Icon />
+                    </div>
+                </a>
+            </IconStyles>
             <FloatingText />
-        </IconStyles>
+        </>
     );
 }

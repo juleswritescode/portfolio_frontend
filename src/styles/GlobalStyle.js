@@ -18,14 +18,16 @@ export var GlobalStyle = createGlobalStyle`
         font-size: 18px;
     }
 
-    * {
-        cursor: none !important;
+    @media (hover: hover) and (pointer: fine) {
+        * {
+            cursor: none !important;
+        }
     }
     
     body {
         background-color: var(--white);
         letter-spacing: 0.05rem;
-        /* overflow-x: hidden; */
+        overflow-x: hidden;
     }
 
     ul {
@@ -35,6 +37,9 @@ export var GlobalStyle = createGlobalStyle`
     a {
         text-decoration: none;
         color: currentColor;
+        &:focus-visible {
+            outline: 1px dashed var(--primary);
+        }
     }
 
     svg {

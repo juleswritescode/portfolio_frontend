@@ -24,15 +24,16 @@ export function Projects({ updater, isOpen }) {
                 onMouseLeave={multiple(hideText, removeHighlightEffect)}
             >
                 <div className="icon-wrapper">
+                    <span className="icon-description">Projects</span>
                     <Icon
                         onClick={multiple(
                             isOpen ? showText : hideText,
-                            updater('projects')
+                            updater
                         )}
                     />
                 </div>
-                <FloatingText />
             </IconStyles>
+            <FloatingText />
         </>
     );
 }

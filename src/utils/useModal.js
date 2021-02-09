@@ -5,16 +5,16 @@ import { highlightCursor } from './highlightCursor';
 import { stopPropagation } from './utils';
 
 var ModalStyles = styled.div`
-    .overlay {
-        position: fixed;
-        width: 100vw;
-        height: 100vh;
-        background-color: rgba(0, 0, 0, 0.5);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 99;
-    }
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99;
 
     .contents {
         padding: 4rem;
@@ -45,19 +45,17 @@ export function useModal() {
     function Modal({ children }) {
         return (
             open && (
-                <ModalStyles>
-                    <div onClick={toggleModal} className="overlay">
-                        <div onClick={stopPropagation} className="contents">
-                            <div
-                                onClick={toggleModal}
-                                onMouseEnter={highlightCursor}
-                                onMouseLeave={highlightCursor}
-                                className="close-modal"
-                            >
-                                <Icon />
-                            </div>
-                            {children}
+                <ModalStyles onClick={toggleModal}>
+                    <div onClick={stopPropagation} className="contents">
+                        <div
+                            onClick={toggleModal}
+                            onMouseEnter={highlightCursor}
+                            onMouseLeave={highlightCursor}
+                            className="close-modal"
+                        >
+                            <Icon />
                         </div>
+                        {children}
                     </div>
                 </ModalStyles>
             )

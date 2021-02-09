@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import HeaderImage from '../images/header.png';
 
 var MessageStyles = styled.div`
-    padding-top: 2rem;
+    padding-top: 4rem;
     margin: 0 auto;
     display: flex;
     justify-content: center;
@@ -13,7 +13,9 @@ var MessageStyles = styled.div`
         object-fit: contain;
         width: clamp(100px, 100%, 950px);
         min-width: 100px;
-        width: 100%;
+    }
+    @media (max-width: 768px) {
+        padding-top: 2rem;
     }
 `;
 

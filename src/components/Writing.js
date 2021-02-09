@@ -25,15 +25,16 @@ export function Writing({ updater, isOpen }) {
                 onMouseLeave={multiple(hideText, removeHighlightEffect)}
             >
                 <div className="icon-wrapper">
+                    <span className="icon-description">ARTICLES</span>
                     <Icon
                         onClick={multiple(
                             isOpen ? showText : hideText,
-                            updater('posts')
+                            updater
                         )}
                     />
                 </div>
-                <FloatingText />
             </IconStyles>
+            <FloatingText />
         </>
     );
 }

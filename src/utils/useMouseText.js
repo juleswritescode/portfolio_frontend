@@ -1,24 +1,19 @@
 import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
 
-var cachedPosition = {
-    top: 0,
-    left: 0,
-};
-
 var TextElementStyle = styled.div`
     position: fixed;
     padding: 0 1rem;
-    top: ${cachedPosition.top};
-    left: ${cachedPosition.left};
-    width: 200px;
+    top: ${({ position }) => position.top};
+    left: ${({ position }) => position.left};
     transform: translateX(-50%);
+    width: 200px;
     text-align: center;
     color: var(--gray);
 
-    animation: fadeIn 200ms forwards;
+    animation: fadeInText 200ms forwards;
 
-    @keyframes fadeIn {
+    @keyframes fadeInText {
         from {
             opacity: 0;
         }
@@ -26,18 +21,31 @@ var TextElementStyle = styled.div`
             opacity: 1;
         }
     }
+
+    @media (max-width: 1024px) {
+        display: none;
+    }
 `;
 
 export function useMouseText(text) {
     var [show, setShow] = useState(false);
-    var [position, setPosition] = useState({
+    var cachedPosition = useRef({
         top: 0,
         left: 0,
     });
     var textEl = useRef(null);
 
     function FloatingText() {
-        return show && <TextElementStyle ref={textEl}>{text}</TextElementStyle>;
+        return (
+            show && (
+                <TextElementStyle
+                    position={cachedPosition.current}
+                    ref={textEl}
+                >
+                    {text}
+                </TextElementStyle>
+            )
+        );
     }
 
     return {
@@ -68,18 +76,22 @@ export function useMouseText(text) {
             return;
         }
 
+        var top = posY + 'px';
+        var left = posX + 'px';
         var textElementStyle = textEl.current.style;
+
         setTimeout(() => {
-            textElementStyle.top = posY + 'px';
-            textElementStyle.left = posX + 'px';
+            textElementStyle.top = top;
+            textElementStyle.left = left;
+            cachedPosition.current = { top, left };
         }, 0);
     }
 
-    function showText(e) {
+    function showText() {
         setShow(true);
     }
 
-    function hideText(e) {
+    function hideText() {
         setShow(false);
     }
 }

@@ -31,10 +31,11 @@ export function Contact() {
                 onMouseLeave={multiple(hideText, removeHighlightEffect)}
             >
                 <div onClick={toggleModal} className="icon-wrapper">
+                    <span className="icon-description">Contact</span>
                     <Icon />
                 </div>
-                <FloatingText />
             </IconStyles>
+            <FloatingText />
         </>
     );
 }

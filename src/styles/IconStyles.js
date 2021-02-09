@@ -10,11 +10,28 @@ export var IconStyles = createGlobalStyle`
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
     background-color: var(--white);
     &:hover {
       * {
         color: var(--primary);
+      }
+    }
+
+    .icon-description {
+      display: none;
+      text-transform: uppercase;
+      font-weight: 200;
+      color: var(--gray);
+      margin-top: 1rem;
+      margin-bottom: .5rem;
+      font-size: .8rem;
+    }
+    
+    @media (max-width: 768px) {
+      flex-direction: column;
+      padding: 0;
+      .icon-description {
+        display: inline-block;
       }
     }
   }
