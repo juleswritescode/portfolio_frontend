@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import validator from 'validator';
-import { useFormContext } from 'react-hook-form';
 import {
     highlightCursor,
     removeHighlightEffect,
@@ -55,16 +54,8 @@ var ContactInfoStyles = styled.div`
     }
 `;
 
-export function ContactInfo({ setTextWritten, formData }) {
-    var { register, watch } = useFormContext();
-
-    useEffect(function updateFormData() {
-        if (formData.current) {
-            formData.current.email = watch('email');
-            formData.current.name = watch('name');
-            formData.current.subject = watch('subject');
-        }
-    });
+export function ContactInfo({ setTextWritten, formData, formHandle }) {
+    var { register, watch } = formHandle;
 
     return (
         <ContactInfoStyles>
@@ -112,6 +103,13 @@ export function ContactInfo({ setTextWritten, formData }) {
                         defaultValue={formData.current.subject}
                     />
                 </label>
+                {/* Necessary so form can set body value when this component is mounted */}
+                <input
+                    type="hidden"
+                    name="body"
+                    ref={register({ required: true, minLength: 50 })}
+                    value={formData.current.body}
+                />
             </div>
             <div className="buttons">
                 <button
@@ -119,13 +117,14 @@ export function ContactInfo({ setTextWritten, formData }) {
                     className="btn"
                     onMouseEnter={highlightCursor}
                     onMouseLeave={removeHighlightEffect}
+                    onClick={updateFormData}
                 >
                     Message Me
                 </button>
                 <span
                     onMouseEnter={highlightCursor}
                     onMouseLeave={removeHighlightEffect}
-                    onClick={() => setTextWritten(false)}
+                    onClick={backToText}
                     className="btn"
                 >
                     Review Text...
@@ -133,4 +132,17 @@ export function ContactInfo({ setTextWritten, formData }) {
             </div>
         </ContactInfoStyles>
     );
+
+    function backToText() {
+        updateFormData();
+        setTextWritten(false);
+    }
+
+    function updateFormData() {
+        if (formData.current) {
+            formData.current.email = watch('email');
+            formData.current.name = watch('name');
+            formData.current.subject = watch('subject');
+        }
+    }
 }

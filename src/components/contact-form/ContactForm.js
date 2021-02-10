@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { useForm, FormProvider } from 'react-hook-form';
+import React, { useState, useRef } from 'react';
+import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 import { Textarea } from './Textarea';
 import { ContactInfo } from './ContactInfo';
@@ -29,6 +29,7 @@ var FormStyles = styled.form`
     }
 
     .btn {
+        display: inline-block;
         padding: 0.875rem 1.5rem;
         background: transparent;
         border: 3px solid var(--gray);
@@ -45,12 +46,17 @@ var FormStyles = styled.form`
         }
     }
 
-    .error {
+    .error,
+    .success {
         width: 100%;
         color: red;
         font-weight: 700;
         text-align: center;
         padding: 1rem 0;
+    }
+
+    .success {
+        color: green;
     }
 
     @keyframes fadeInForm {
@@ -71,61 +77,73 @@ var FormStyles = styled.form`
 
 export function ContactForm({ updater }) {
     var [textWritten, setTextWritten] = useState(false);
+    var [submitted, setSubmitted] = useState(null);
     var formData = useRef({
         name: '',
         email: '',
         subject: '',
         body: '',
     });
-    // register, handleSubmit, watch, errors
     var formHandle = useForm(formData.current);
     var { handleSubmit, errors } = formHandle;
 
-    return (
-        <FormProvider {...formHandle}>
-            <FormStyles
-                onSubmit={handleSubmit(
-                    () => {},
-                    () => {}
-                )}
-            >
-                <div
-                    className="close-contact"
-                    onClick={updater}
-                    onMouseEnter={highlightCursor}
-                    onMouseLeave={removeHighlightEffect}
-                >
-                    <Icon />
-                </div>
-                {(errors.body ||
-                    errors.email ||
-                    errors.name ||
-                    errors.subject) && (
-                    <p className="error">{handleErrors(errors)}</p>
-                )}
-                {!textWritten && (
-                    <Textarea
-                        setTextWritten={setTextWritten}
-                        formData={formData}
-                    />
-                )}
+    async function onSubmit(data) {
+        // Do cool async stuff.
+        var data = await Promise.resolve(data);
+        console.log('success in form validation', data);
 
-                {textWritten && (
-                    <ContactInfo
-                        setTextWritten={setTextWritten}
-                        formData={formData}
-                    />
-                )}
-            </FormStyles>
-        </FormProvider>
+        if (Math.random() > 0.5) {
+            setSubmitted(true);
+        } else {
+            setSubmitted(false);
+        }
+        setTimeout(() => setSubmitted(null), 3000);
+    }
+
+    return (
+        <FormStyles onSubmit={handleSubmit(onSubmit)}>
+            <div
+                className="close-contact"
+                onClick={updater}
+                onMouseEnter={highlightCursor}
+                onMouseLeave={removeHighlightEffect}
+            >
+                <Icon />
+            </div>
+            {(errors.body || errors.email || errors.name || errors.subject) && (
+                <p className="error">{handleErrors(errors)}</p>
+            )}
+            {submitted === true && (
+                <p className="success">Thank you for your message!</p>
+            )}
+            {submitted === false && (
+                <p className="error">
+                    An error occured. It is likely not your fault.
+                </p>
+            )}
+            {!textWritten && (
+                <Textarea
+                    setTextWritten={setTextWritten}
+                    formData={formData}
+                    formHandle={formHandle}
+                />
+            )}
+
+            {textWritten && (
+                <ContactInfo
+                    setTextWritten={setTextWritten}
+                    formData={formData}
+                    formHandle={formHandle}
+                />
+            )}
+        </FormStyles>
     );
 
     function handleErrors(error) {
         if (error.body) {
-            setTextWritten(false);
             switch (error.body.type) {
                 case 'required':
-                    return 'Please provide a message.';
+                    return 'Please provide a meaningful message.';
                 case 'minLength':
                     return 'Please provide a meaningful message.';
             }

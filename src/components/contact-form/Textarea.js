@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useFormContext } from 'react-hook-form';
 import {
     highlightCursor,
     removeHighlightEffect,
@@ -24,14 +23,8 @@ var TextAreaStyles = styled.div`
     }
 `;
 
-export function Textarea({ setTextWritten, formData }) {
-    var { register, watch, errors, handleSubmit } = useFormContext();
-
-    useEffect(function updateFormData() {
-        if (formData.current) {
-            formData.current.body = watch('body');
-        }
-    });
+export function Textarea({ setTextWritten, formData, formHandle }) {
+    var { register, watch, trigger } = formHandle;
 
     return (
         <TextAreaStyles>
@@ -49,15 +42,26 @@ export function Textarea({ setTextWritten, formData }) {
                 rows="10"
                 defaultValue={formData.current.body}
             ></textarea>
-            <button
+            <span
                 className="btn"
-                // handleSubmit will error because the other fields haven't been set. We need to check if we should proceed in the onError callback
-                onClick={() => setTextWritten(true)}
+                onClick={proceedToInfo}
                 onMouseEnter={highlightCursor}
                 onMouseLeave={removeHighlightEffect}
             >
                 Done? Fill in your Details...
-            </button>
+            </span>
         </TextAreaStyles>
     );
+
+    function proceedToInfo() {
+        // store the form state in a ref (otherwise, it will get lost when component unmounts)
+        if (formData.current) {
+            trigger('body').then(validated => {
+                if (validated) {
+                    setTextWritten(true);
+                }
+            });
+            formData.current.body = watch('body');
+        }
+    }
 }
