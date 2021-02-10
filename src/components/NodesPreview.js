@@ -39,8 +39,7 @@ var SingleNodeStyles = styled.div`
         margin: 0.5rem 0;
     }
     .gatsby-image-wrapper {
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-            0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        box-shadow: var(--shadow-md);
         width: 200px;
         height: 200px;
         border-radius: 25px;

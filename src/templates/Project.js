@@ -1,7 +1,6 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 import { BiArrowBack as Icon } from 'react-icons/bi';
-import styled from 'styled-components';
 import {
     highlightCursor,
     removeHighlightEffect,
@@ -11,9 +10,7 @@ import Markdown from 'react-markdown';
 import { ContentStyles } from '../styles/ContentStyles';
 
 export default function BlogPost({ data = {} }) {
-    console.log({ data });
     var { description, mainImage, title, github, link } = data.project || {};
-    console.log(description);
     return (
         <ContentStyles>
             <h2>

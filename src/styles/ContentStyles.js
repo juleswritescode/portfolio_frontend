@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import ListItem from '../assets/list-item.svg';
 
 export var ContentStyles = styled.div`
     max-width: 700px;

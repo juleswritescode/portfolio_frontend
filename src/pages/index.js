@@ -9,13 +9,16 @@ import { Projects } from '../components/Projects';
 import { WelcomeMessage } from '../components/WelcomeMessage';
 import { NodesPreview } from '../components/NodesPreview';
 import { graphql } from 'gatsby';
+import { ContactForm } from '../components/contact-form/ContactForm';
 import styled from 'styled-components';
 
 var Wrapper = styled.div`
     width: clamp(100px, 90%, 950px);
     min-width: 100px;
     max-width: 950px;
+    min-height: 100vh;
     margin: 0 auto;
+    position: relative;
 `;
 var IconStyles = styled.div`
     margin-top: 2rem;
@@ -57,13 +60,16 @@ export default function Index({ data = {} }) {
                     />
                     <Writing updater={updater('posts')} isOpen={showPosts} />
                     <MusicHobby />
-                    <Contact />
+                    <Contact
+                        updater={updater('contact')}
+                        isOpen={showContact}
+                    />
                 </IconStyles>
                 {showProjects && <NodesPreview nodes={projects} />}
                 {showPosts && <NodesPreview nodes={posts} />}
-                {showContact && <p>PopelContact</p>}
+                {showContact && <ContactForm updater={updater('contact')} />}
+                <SocialLinks />
             </Wrapper>
-            <SocialLinks />
         </>
     );
 
@@ -71,11 +77,16 @@ export default function Index({ data = {} }) {
         return () => {
             if (string == 'posts') {
                 setShowPosts(o => !o);
+                setShowContact(false);
                 setShowProjects(false);
             } else if (string == 'projects') {
                 setShowProjects(o => !o);
+                setShowContact(false);
                 setShowPosts(false);
-            } else if (false) {
+            } else if (string == 'contact') {
+                setShowContact(o => !o);
+                setShowPosts(false);
+                setShowProjects(false);
             }
         };
     }
