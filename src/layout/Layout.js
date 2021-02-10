@@ -5,7 +5,6 @@ import { IconStyles } from '../styles/IconStyles';
 import 'normalize.css';
 import { MousePointer } from '../components/MousePointer';
 import { removeHighlightEffect } from '../utils/highlightCursor';
-
 import styled from 'styled-components';
 
 var LayoutStyles = styled.div`
@@ -13,7 +12,7 @@ var LayoutStyles = styled.div`
     min-height: 100vh;
 `;
 
-export function Layout({ children }) {
+export default function Layout({ children }) {
     useEffect(removeHighlightEffect);
     return (
         <LayoutStyles>

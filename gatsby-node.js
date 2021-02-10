@@ -1,11 +1,11 @@
 var path = require('path');
 
-export async function createPages({ graphql, actions }) {
+exports.createPages = async function ({ graphql, actions }) {
     await Promise.all([
         createBlogPosts(graphql, actions),
         createProjectPages(graphql, actions),
     ]);
-}
+};
 
 async function createBlogPosts(graphql, actions) {
     var blogTemplate = path.resolve('./src/templates/BlogPost.js');
