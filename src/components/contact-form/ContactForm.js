@@ -87,19 +87,6 @@ export function ContactForm({ updater }) {
     var formHandle = useForm(formData.current);
     var { handleSubmit, errors } = formHandle;
 
-    async function onSubmit(data) {
-        // Do cool async stuff.
-        var data = await Promise.resolve(data);
-        console.log('success in form validation', data);
-
-        if (Math.random() > 0.5) {
-            setSuccess(true);
-        } else {
-            setSuccess(false);
-        }
-        setTimeout(() => setSuccess(null), 3000);
-    }
-
     return (
         <FormStyles onSubmit={handleSubmit(onSubmit)}>
             <div
@@ -113,10 +100,10 @@ export function ContactForm({ updater }) {
             {(errors.body || errors.email || errors.name || errors.subject) && (
                 <p className="error">{handleErrors(errors)}</p>
             )}
-            {submitted === true && (
+            {success === true && (
                 <p className="success">Thank you for your message!</p>
             )}
-            {submitted === false && (
+            {success === false && (
                 <p className="error">
                     An error occured. It is likely not your fault.
                 </p>
@@ -138,6 +125,19 @@ export function ContactForm({ updater }) {
             )}
         </FormStyles>
     );
+
+    async function onSubmit(data) {
+        // Do cool async stuff.
+        var data = await Promise.resolve(data);
+        console.log('success in form validation', data);
+
+        if (Math.random() > 0.5) {
+            setSuccess(true);
+        } else {
+            setSuccess(false);
+        }
+        setTimeout(() => setSuccess(null), 3000);
+    }
 
     function handleErrors(error) {
         if (error.body) {
