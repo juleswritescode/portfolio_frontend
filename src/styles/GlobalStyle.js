@@ -29,6 +29,8 @@ export var GlobalStyle = createGlobalStyle`
         background-color: var(--white);
         letter-spacing: 0.05rem;
         overflow-x: hidden;
+        margin-bottom: 0;
+        padding: 0;
     }
 
     ul {

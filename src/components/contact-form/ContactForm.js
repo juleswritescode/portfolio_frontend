@@ -10,10 +10,13 @@ import {
 } from '../../utils/highlightCursor';
 
 var FormStyles = styled.form`
+    padding: 0;
     padding-top: 3rem;
     padding-bottom: 4rem;
     animation: fadeInForm forwards ease-in;
     animation-duration: 300ms;
+    margin: 0 auto;
+    max-width: 90%;
 
     .close-contact {
         svg {
@@ -39,6 +42,7 @@ var FormStyles = styled.form`
         border-radius: 5px;
         font-size: var(--fontm);
         font-weight: 900;
+        text-align: center;
 
         &:hover {
             transform: scale(0.95);
@@ -70,8 +74,12 @@ var FormStyles = styled.form`
         }
     }
 
-    @media (max-height: 800px) {
-        padding-left: 1.5rem;
+    @media (max-width: 768px) {
+        padding-bottom: 6rem;
+        .btn {
+            display: block;
+            margin: 2rem auto;
+        }
     }
 `;
 

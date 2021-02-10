@@ -8,14 +8,9 @@ import {
 
 var ContactInfoStyles = styled.div`
     margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
+    width: 90%;
 
     .inputs {
-        display: flex;
-        flex-direction: column;
         color: var(--darkgray);
         width: 100%;
 
@@ -49,8 +44,28 @@ var ContactInfoStyles = styled.div`
     }
 
     span.btn {
-        display: inline-block;
         margin-left: 1rem;
+    }
+
+    .buttons {
+        box-sizing: border-box;
+        display: flex;
+        width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .buttons {
+            flex-direction: column;
+            justify-items: center;
+            align-items: center;
+        }
+        .buttons span.btn,
+        .buttons button.btn {
+            box-sizing: border-box;
+            display: inline-block;
+            width: 100%;
+            margin: 0.5rem auto;
+        }
     }
 `;
 

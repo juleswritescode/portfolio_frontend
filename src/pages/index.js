@@ -16,7 +16,9 @@ var Wrapper = styled.div`
     width: clamp(100px, 90%, 950px);
     min-width: 100px;
     max-width: 950px;
+    min-height: 100vh;
     margin: 0 auto;
+    position: relative;
 `;
 var IconStyles = styled.div`
     margin-top: 2rem;
@@ -66,8 +68,8 @@ export default function Index({ data = {} }) {
                 {showProjects && <NodesPreview nodes={projects} />}
                 {showPosts && <NodesPreview nodes={posts} />}
                 {showContact && <ContactForm updater={updater('contact')} />}
+                <SocialLinks />
             </Wrapper>
-            <SocialLinks />
         </>
     );
 

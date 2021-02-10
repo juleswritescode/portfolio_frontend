@@ -11,7 +11,7 @@ var SocialStyles = styled.div`
     padding: 0;
     bottom: 0;
     left: 50%;
-    position: fixed;
+    position: absolute;
 
     ul {
         transform: translateX(-60%);
@@ -42,13 +42,8 @@ var SocialStyles = styled.div`
     }
 
     @media (max-width: 768px) {
-        left: unset;
-        right: 1rem;
-        bottom: 6rem;
-
+        bottom: 2rem;
         ul {
-            transform: translateX(0);
-            flex-direction: column;
             gap: 2rem;
             padding-bottom: 0rem;
             font-size: var(--fonts);

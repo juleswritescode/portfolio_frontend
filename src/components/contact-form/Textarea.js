@@ -6,9 +6,11 @@ import {
 } from '../../utils/highlightCursor';
 
 var TextAreaStyles = styled.div`
+    width: 100%;
     textarea {
-        width: 100%;
-        height: 100%;
+        width: 90%;
+        display: inline-block;
+        margin: 0 auto;
         resize: none;
         padding: 2rem 2rem;
         color: var(--darkgray);
@@ -20,6 +22,13 @@ var TextAreaStyles = styled.div`
 
     textarea:focus {
         outline: none;
+    }
+
+    @media (max-width: 768px) {
+        textarea  {
+            padding: 1rem;
+            font-size: var(--fontm);
+        }
     }
 `;
 
@@ -34,7 +43,6 @@ export function Textarea({ setTextWritten, formData, formHandle }) {
                 placeholder="Write me a message..."
                 name="body"
                 id="body"
-                cols="30"
                 ref={register({
                     required: true,
                     minLength: 50,
