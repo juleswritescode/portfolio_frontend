@@ -55,13 +55,11 @@ export function Textarea({ setTextWritten, formData, formHandle }) {
 
     function proceedToInfo() {
         // store the form state in a ref (otherwise, it will get lost when component unmounts)
-        if (formData.current) {
-            trigger('body').then(validated => {
-                if (validated) {
-                    setTextWritten(true);
-                }
-            });
-            formData.current.body = watch('body');
-        }
+        formData.current.body = watch('body');
+        trigger('body').then(validated => {
+            if (validated) {
+                setTextWritten(true);
+            }
+        });
     }
 }

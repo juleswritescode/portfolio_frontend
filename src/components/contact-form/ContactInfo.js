@@ -139,10 +139,8 @@ export function ContactInfo({ setTextWritten, formData, formHandle }) {
     }
 
     function updateFormData() {
-        if (formData.current) {
-            formData.current.email = watch('email');
-            formData.current.name = watch('name');
-            formData.current.subject = watch('subject');
-        }
+        formData.current.email = watch('email');
+        formData.current.name = watch('name');
+        formData.current.subject = watch('subject');
     }
 }

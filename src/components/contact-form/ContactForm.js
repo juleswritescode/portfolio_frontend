@@ -77,7 +77,7 @@ var FormStyles = styled.form`
 
 export function ContactForm({ updater }) {
     var [textWritten, setTextWritten] = useState(false);
-    var [submitted, setSubmitted] = useState(null);
+    var [success, setSuccess] = useState(null);
     var formData = useRef({
         name: '',
         email: '',
@@ -93,11 +93,11 @@ export function ContactForm({ updater }) {
         console.log('success in form validation', data);
 
         if (Math.random() > 0.5) {
-            setSubmitted(true);
+            setSuccess(true);
         } else {
-            setSubmitted(false);
+            setSuccess(false);
         }
-        setTimeout(() => setSubmitted(null), 3000);
+        setTimeout(() => setSuccess(null), 3000);
     }
 
     return (
