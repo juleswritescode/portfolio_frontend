@@ -33,7 +33,7 @@ var ContactInfoStyles = styled.div`
                 font-size: var(--fontm);
                 width: clamp(100px, 100%, 800px);
                 border: 0;
-                border-radius: 5px;
+                border-radius: 15px;
                 padding: 0.5rem 1rem;
                 background: var(--lightergray);
                 &:focus {
@@ -75,6 +75,21 @@ export function ContactInfo({ setTextWritten, formData, formHandle }) {
     return (
         <ContactInfoStyles>
             <div className="inputs">
+                <label htmlFor="subject">
+                    <span>Subject</span>
+                    <input
+                        type="text"
+                        id="subject"
+                        name="subject"
+                        ref={register({
+                            required: true,
+                            maxLength: 144,
+                        })}
+                        onMouseEnter={highlightCursor}
+                        onMouseLeave={removeHighlightEffect}
+                        defaultValue={formData.current.subject}
+                    />
+                </label>
                 <label htmlFor="name">
                     <span>Your Name</span>
                     <input
@@ -101,21 +116,6 @@ export function ContactInfo({ setTextWritten, formData, formHandle }) {
                             validate: validator.isEmail,
                         })}
                         defaultValue={formData.current.email}
-                    />
-                </label>
-                <label htmlFor="subject">
-                    <span>Subject</span>
-                    <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        ref={register({
-                            required: true,
-                            maxLength: 144,
-                        })}
-                        onMouseEnter={highlightCursor}
-                        onMouseLeave={removeHighlightEffect}
-                        defaultValue={formData.current.subject}
                     />
                 </label>
                 {/* Necessary so form can set body value when this component is mounted */}

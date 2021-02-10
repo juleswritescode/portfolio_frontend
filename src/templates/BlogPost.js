@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { graphql, Link } from 'gatsby';
 import { BiArrowBack as Icon } from 'react-icons/bi';
 import BlockContent from '@sanity/block-content-to-react';

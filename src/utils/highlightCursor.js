@@ -1,4 +1,6 @@
-var { style } = document.documentElement;
+if (typeof window != 'undefined') {
+    var { style } = document.documentElement;
+}
 var cachedMouse;
 
 export function highlightCursor(e) {
@@ -22,7 +24,7 @@ export function removeHighlightEffect() {
 function getMouse() {
     var mouse;
     if (!cachedMouse) {
-        mouse = document.getElementById('inner-mouse');
+        mouse = document && document.getElementById('inner-mouse');
         cachedMouse = mouse;
     } else {
         mouse = cachedMouse;

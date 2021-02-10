@@ -136,15 +136,22 @@ export function ContactForm({ updater }) {
 
     async function onSubmit(data) {
         // Do cool async stuff.
-        var data = await Promise.resolve(data);
-        console.log('success in form validation', data);
-
-        if (Math.random() > 0.5) {
+        try {
+            await fetch('/.netlify/functions/sendMail', {
+                method: 'POST',
+                cache: 'no-cache',
+                // headers: {
+                //     'Content-Type': 'application/json'
+                // },
+                body: JSON.stringify(data),
+            });
             setSuccess(true);
-        } else {
+            setTimeout(updater, 4000);
+        } catch (err) {
+            console.log(err);
             setSuccess(false);
+            setTimeout(() => setSuccess(null), 3000);
         }
-        setTimeout(() => setSuccess(null), 3000);
     }
 
     function handleErrors(error) {
