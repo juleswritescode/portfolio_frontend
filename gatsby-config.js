@@ -35,7 +35,7 @@ module.exports = {
             resolve: 'gatsby-source-sanity',
             options: {
                 ...sanityConfig,
-                watchMode: true,
+                watchMode: process.env.NODE_ENV == 'production' ? false : true,
             },
         },
         'gatsby-transformer-sharp',
