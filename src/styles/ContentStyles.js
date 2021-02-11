@@ -11,6 +11,9 @@ export var ContentStyles = styled.div`
         height: 50px;
         top: 25px;
         left: 15px;
+        a:hover {
+            border: 0;
+        }
     }
 
     .overview {
@@ -78,7 +81,11 @@ export var ContentStyles = styled.div`
     }
 
     a {
-        color: var(--primary);
+        font-weight: 600;
+        color: var(--black);
+        &:hover {
+            border-bottom: 2px solid var(--primary);
+        }
     }
 
     @media (max-width: 900px) {
