@@ -11,13 +11,6 @@ import { ContentStyles } from '../styles/ContentStyles';
 import Img from 'gatsby-image';
 
 var ContentOverviewStyles = styled.div`
-    .gatsby-image-wrapper {
-        margin: 0;
-        display: inline-block;
-        height: 60px;
-        width: 60px;
-    }
-
     ul {
         list-style: none;
         li {
@@ -26,20 +19,37 @@ var ContentOverviewStyles = styled.div`
             padding: 0.5rem 0;
             display: grid;
             grid-template-columns: 60px 1fr auto;
+            grid-template-rows: 60px;
             gap: 1rem;
 
             &:hover {
                 background: var(--lightergray);
             }
+            .gatsby-image-wrapper {
+                margin: 0;
+                display: inline-block;
+                height: 60px;
+                width: 60px;
+            }
             p {
                 display: flex;
                 height: 100%;
                 align-items: center;
+                margin-bottom: 0;
             }
 
             .title {
                 font-size: var(--fontl);
                 font-weight: 500;
+            }
+        }
+    }
+    @media (max-width: 1024px) {
+        ul {
+            li {
+                .published {
+                    display: none;
+                }
             }
         }
     }
