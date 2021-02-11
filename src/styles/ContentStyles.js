@@ -5,13 +5,12 @@ export var ContentStyles = styled.div`
 
     .icon {
         position: fixed;
-        width: 140px;
+        width: 100px;
         display: flex;
         justify-content: space-between;
         height: 50px;
-        padding: 1rem;
-        top: 0;
-        left: 0;
+        top: 25px;
+        left: 15px;
     }
 
     .overview {
@@ -88,12 +87,13 @@ export var ContentStyles = styled.div`
         .icon {
             position: absolute;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            width: 20px;
-            height: 20px;
-            top: 25px;
-            left: 15px;
+            top: 20px;
+
+            svg {
+                color: var(--gray);
+            }
         }
 
         h2 {

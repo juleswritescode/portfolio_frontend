@@ -21,10 +21,12 @@ var MousePointerStyles = styled.div`
         border-radius: 50%;
         border: 2px solid var(--outer-mouse);
         transition-duration: 300ms;
+        box-sizing: content-box;
     }
 
     .inner {
         --size: 60%;
+        box-sizing: content-box;
         height: var(--size);
         width: var(--size);
         background-color: var(--inner-mouse);
@@ -56,7 +58,7 @@ export function MousePointer(props) {
 
     return (
         <MousePointerStyles ref={mousePointerEl}>
-            <div className="outer ">
+            <div className="outer">
                 <div id="inner-mouse" className="inner"></div>
             </div>
         </MousePointerStyles>
