@@ -1,11 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 
 var TextElementStyle = styled.div`
     position: fixed;
     padding: 0 1rem;
-    top: ${({ position }) => position.top};
-    left: ${({ position }) => position.left};
+    /* top: ${({ position }) => position.top}; */
+    /* left: ${({ position }) => position.left}; */
     transform: translateX(-50%);
     width: 200px;
     text-align: center;
@@ -59,9 +59,8 @@ export function useMouseText(text) {
         var posX, posY;
 
         {
-            let screenHeight = window.innerHeight;
             // Adjusting the location of textelement based on where the mouse is, relative to the viewport.
-
+            let screenHeight = window.innerHeight;
             posX = e.clientX;
             if (e.clientY > screenHeight * 0.8) {
                 posY = e.clientY - 120;

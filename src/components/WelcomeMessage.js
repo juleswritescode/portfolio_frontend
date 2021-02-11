@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import HeaderImage from '../images/header.png';
+import HeaderImage from '../images/header-no-comma.png';
 import MobileHeaderImage from '../images/header-mobile.png';
 
 var MessageStyles = styled.div`
