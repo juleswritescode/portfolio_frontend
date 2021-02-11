@@ -8,7 +8,7 @@ export var GlobalStyle = createGlobalStyle`
         --lightgray: #aaa; 
         --lightergray: hsla(0, 0%, 93%, .5);
         --white: #fff;
-        --primary: #e87234;
+        --primary:#a8d5e2;
         --inner-mouse: #777;
         --outer-mouse: #aaa;
         --outer-mouse-size: 25px;
@@ -45,6 +45,9 @@ export var GlobalStyle = createGlobalStyle`
         color: var(--lightgray);
         &:focus-visible {
             outline: 1px dashed var(--primary);
+        }
+        &:hover {
+            color: var(--primary);
         }
     }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import HeaderImage from '../images/header.png';
+import MobileHeaderImage from '../images/header-mobile.png';
 
 var MessageStyles = styled.div`
     padding-top: 4rem;
@@ -15,32 +16,16 @@ var MessageStyles = styled.div`
 `;
 
 var MobileMessageStyles = styled.div`
-    padding-top: 1.5rem;
-    text-align: center;
-
-    h1,
-    h2,
-    h3 {
-        margin-bottom: 0.2rem;
-    }
-
-    h3 {
-        color: var(--primary);
-        font-weight: 500;
-    }
-
-    h2 {
-        color: var(--darkgray);
-    }
-
-    h1 {
-        color: var(--black);
+    padding-top: 2rem;
+    img {
+        object-fit: contain;
+        width: 100%;
     }
 
     hr {
-        margin: 1rem auto;
-        opacity: 0.75;
-        border: 0.5px solid var(--lightgray);
+        opacity: 0.5;
+        border-color: var(--lightgray);
+        margin-top: 1rem;
     }
 
     @media (min-width: 768px) {
@@ -58,12 +43,10 @@ export function WelcomeMessage() {
                 />
             </MessageStyles>
             <MobileMessageStyles>
-                <h3>Welcome to my Page</h3>
-                {/* <h1>
-                    &lt;<span>Julian Domke</span>/&gt;
-                </h1> */}
-                <h1>Julian Domke</h1>
-                <h2>Web Developer</h2>
+                <img
+                    src={MobileHeaderImage}
+                    alt="Welcome to my page. I'm Julian, a Web Developer."
+                />
                 <hr />
             </MobileMessageStyles>
         </>
