@@ -5,10 +5,18 @@ export var ContentStyles = styled.div`
 
     .icon {
         position: fixed;
-        width: 50px;
+        width: 140px;
+        display: flex;
+        justify-content: space-between;
         height: 50px;
         padding: 1rem;
         top: 0;
+        left: 0;
+    }
+
+    .overview {
+        position: fixed;
+        top: 50px;
         left: 0;
     }
 

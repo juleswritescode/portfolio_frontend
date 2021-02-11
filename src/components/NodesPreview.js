@@ -22,6 +22,25 @@ var NodesStyles = styled.div`
         gap: 25px;
         justify-items: center;
     }
+
+    .more-content {
+        height: 200px;
+        width: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 5px;
+        background-color: var(--lightergray);
+        box-shadow: var(--shadow-md);
+        &:hover {
+            transform: scale(0.99);
+            box-shadow: none;
+        }
+
+        span {
+            color: var(--darkgray);
+        }
+    }
 `;
 
 var SingleNodeStyles = styled.div`
@@ -45,6 +64,10 @@ var SingleNodeStyles = styled.div`
         height: 200px;
         border-radius: 5px;
         margin-bottom: 1rem;
+        &:hover {
+            box-shadow: none;
+            transform: scale(0.99);
+        }
     }
 
     @keyframes fadeInPreview {
@@ -67,6 +90,15 @@ export function NodesPreview({ nodes }) {
                     <SingleNodePreview node={node} idx={idx} key={node.id} />
                 );
             })}
+            <Link to="/content-overview">
+                <div
+                    onMouseLeave={removeHighlightEffect}
+                    onMouseEnter={highlightCursor}
+                    className="more-content"
+                >
+                    <span>See Overview...</span>
+                </div>
+            </Link>
         </NodesStyles>
     );
 }

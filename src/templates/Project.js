@@ -1,6 +1,7 @@
 import React from 'react';
 import { graphql, Link } from 'gatsby';
 import { BiArrowBack as Icon } from 'react-icons/bi';
+import { AiOutlineOrderedList as ListIcon } from 'react-icons/ai';
 import {
     highlightCursor,
     removeHighlightEffect,
@@ -39,9 +40,16 @@ export default function BlogPost({ data = {} }) {
                 <Link
                     to="/"
                     onMouseEnter={highlightCursor}
-                    onMouseLeave={highlightCursor}
+                    onMouseLeave={removeHighlightEffect}
                 >
-                    <Icon />
+                    <Icon title="Back" />
+                </Link>
+                <Link
+                    to="/content-overview"
+                    onMouseEnter={highlightCursor}
+                    onMouseLeave={removeHighlightEffect}
+                >
+                    <ListIcon title="See All Projects" />
                 </Link>
             </div>
             <Img

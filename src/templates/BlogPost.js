@@ -2,6 +2,7 @@ import React from 'react';
 
 import { graphql, Link } from 'gatsby';
 import { BiArrowBack as Icon } from 'react-icons/bi';
+import { AiOutlineOrderedList as ListIcon } from 'react-icons/ai';
 import BlockContent from '@sanity/block-content-to-react';
 import {
     highlightCursor,
@@ -54,6 +55,13 @@ export default function BlogPost({ data = {} }) {
                     onMouseLeave={removeHighlightEffect}
                 >
                     <Icon />
+                </Link>
+                <Link
+                    to="/content-overview"
+                    onMouseEnter={highlightCursor}
+                    onMouseLeave={removeHighlightEffect}
+                >
+                    <ListIcon title="See All Posts" />
                 </Link>
             </div>
             <Img
