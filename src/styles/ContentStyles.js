@@ -1,11 +1,9 @@
 import styled from 'styled-components';
 
 export var ContentStyles = styled.div`
-    max-width: 700px;
     padding: 4rem 1rem;
-    margin: 0 auto;
 
-    .icon-wrapper {
+    .icon {
         position: fixed;
         width: 50px;
         height: 50px;
@@ -28,6 +26,7 @@ export var ContentStyles = styled.div`
             font-size: var(--fontm);
             color: var(--lightgray);
             font-weight: 400;
+            margin-left: 2rem;
         }
 
         .links {
@@ -75,18 +74,17 @@ export var ContentStyles = styled.div`
         color: var(--primary);
     }
 
-    figure .gatsby-image-wrapper {
-        margin: 2rem 0;
-    }
-
-    @media (max-width: 768px) {
+    @media (max-width: 900px) {
         padding-top: 5rem;
 
-        .icon-wrapper {
+        .icon {
             position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 20px;
             height: 20px;
-            top: 15px;
+            top: 25px;
             left: 15px;
         }
 

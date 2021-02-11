@@ -19,7 +19,6 @@ var MousePointerStyles = styled.div`
         width: var(--outer-mouse-size);
         height: var(--outer-mouse-size);
         border-radius: 50%;
-        background: transparent;
         border: 2px solid var(--outer-mouse);
         transition-duration: 300ms;
     }

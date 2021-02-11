@@ -8,8 +8,6 @@ import {
 
 var ContactInfoStyles = styled.div`
     margin-top: 1rem;
-    width: 90%;
-
     .inputs {
         color: var(--darkgray);
         width: 100%;
@@ -18,7 +16,6 @@ var ContactInfoStyles = styled.div`
             display: flex;
             flex-direction: column;
             margin-bottom: 1rem;
-            width: 100%;
 
             span {
                 margin-bottom: 0.3rem;
@@ -31,9 +28,8 @@ var ContactInfoStyles = styled.div`
 
             input {
                 font-size: var(--fontm);
-                width: clamp(100px, 100%, 800px);
                 border: 0;
-                border-radius: 15px;
+                border-radius: 5px;
                 padding: 0.5rem 1rem;
                 background: var(--lightergray);
                 &:focus {
@@ -47,21 +43,9 @@ var ContactInfoStyles = styled.div`
         margin-left: 1rem;
     }
 
-    .buttons {
-        box-sizing: border-box;
-        display: flex;
-        width: 100%;
-    }
-
     @media (max-width: 768px) {
-        .buttons {
-            flex-direction: column;
-            justify-items: center;
-            align-items: center;
-        }
         .buttons span.btn,
         .buttons button.btn {
-            box-sizing: border-box;
             display: inline-block;
             width: 100%;
             margin: 0.5rem auto;

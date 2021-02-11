@@ -10,8 +10,6 @@ var QuoteStyles = styled.figure`
         position: absolute;
         line-height: 0.5;
         z-index: -1;
-        top: 0;
-        left: 0;
         color: var(--lightergray);
         font-size: 16rem;
     }

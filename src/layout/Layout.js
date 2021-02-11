@@ -7,20 +7,24 @@ import { MousePointer } from '../components/MousePointer';
 import { removeHighlightEffect } from '../utils/highlightCursor';
 import styled from 'styled-components';
 
-var LayoutStyles = styled.div`
-    width: 100vw;
+var Wrapper = styled.div`
+    width: clamp(100px, 90%, 950px);
+    min-width: 100px;
+    max-width: 950px;
     min-height: 100vh;
+    margin: 0 auto;
+    position: relative;
 `;
 
 export default function Layout({ children }) {
     useEffect(removeHighlightEffect);
     return (
-        <LayoutStyles>
-            <MousePointer />
-            <IconStyles />
-            <Typography />
+        <Wrapper>
             <GlobalStyle />
+            <Typography />
+            <IconStyles />
+            <MousePointer />
             {children}
-        </LayoutStyles>
+        </Wrapper>
     );
 }

@@ -12,26 +12,17 @@ import { graphql } from 'gatsby';
 import { ContactForm } from '../components/contact-form/ContactForm';
 import styled from 'styled-components';
 
-var Wrapper = styled.div`
-    width: clamp(100px, 90%, 950px);
-    min-width: 100px;
-    max-width: 950px;
-    min-height: 100vh;
-    margin: 0 auto;
-    position: relative;
-`;
 var IconStyles = styled.div`
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     column-gap: 1rem;
+    row-gap: 1rem;
     justify-items: center;
     padding: 0 5rem;
 
     @media (max-width: 768px) {
-        margin-top: 1rem;
         grid-template-columns: repeat(2, 1fr);
-        justify-items: space-around;
         column-gap: 4rem;
         padding: 0 2rem;
     }
@@ -51,25 +42,17 @@ export default function Index({ data = {} }) {
                 <title>Jules' Portfolio</title>
                 <link rel="canonical" href="http://jules.codes" />
             </Helmet>
-            <Wrapper>
-                <WelcomeMessage />
-                <IconStyles>
-                    <Projects
-                        updater={updater('projects')}
-                        isOpen={showProjects}
-                    />
-                    <Writing updater={updater('posts')} isOpen={showPosts} />
-                    <MusicHobby />
-                    <Contact
-                        updater={updater('contact')}
-                        isOpen={showContact}
-                    />
-                </IconStyles>
-                {showProjects && <NodesPreview nodes={projects} />}
-                {showPosts && <NodesPreview nodes={posts} />}
-                {showContact && <ContactForm updater={updater('contact')} />}
-                <SocialLinks />
-            </Wrapper>
+            <WelcomeMessage />
+            <IconStyles>
+                <Projects updater={updater('projects')} isOpen={showProjects} />
+                <Writing updater={updater('posts')} isOpen={showPosts} />
+                <MusicHobby />
+                <Contact updater={updater('contact')} isOpen={showContact} />
+            </IconStyles>
+            {showProjects && <NodesPreview nodes={projects} />}
+            {showPosts && <NodesPreview nodes={posts} />}
+            {showContact && <ContactForm updater={updater('contact')} />}
+            <SocialLinks />
         </>
     );
 

@@ -9,7 +9,7 @@ import {
 import { multiple } from '../utils/utils';
 
 var IconStyles = styled.div.attrs({
-    className: 'icon-corner',
+    className: 'icon-wrapper',
 })``;
 
 export function MusicHobby() {
@@ -18,21 +18,16 @@ export function MusicHobby() {
     );
     return (
         <>
-            <IconStyles
-                onMouseMove={updateTextPosition}
-                onMouseEnter={multiple(showText, highlightCursor)}
-                onMouseLeave={multiple(hideText, removeHighlightEffect)}
-            >
-                <a
-                    href="https://www.instagram.com/julian.domke"
-                    target="_blank"
+            <a href="https://www.instagram.com/julian.domke" target="_blank">
+                <IconStyles
+                    onMouseMove={updateTextPosition}
+                    onMouseEnter={multiple(showText, highlightCursor)}
+                    onMouseLeave={multiple(hideText, removeHighlightEffect)}
                 >
-                    <div className="icon-wrapper">
-                        <span className="icon-description">Music</span>
-                        <Icon />
-                    </div>
-                </a>
-            </IconStyles>
+                    <span className="icon-description">Music</span>
+                    <Icon />
+                </IconStyles>
+            </a>
             <FloatingText />
         </>
     );

@@ -9,7 +9,7 @@ import {
 import { multiple } from '../utils/utils';
 
 var IconStyles = styled.div.attrs({
-    className: 'icon-corner',
+    className: 'icon-wrapper',
 })``;
 
 export function Projects({ updater, isOpen }) {
@@ -23,17 +23,12 @@ export function Projects({ updater, isOpen }) {
                 onMouseEnter={multiple(showText, highlightCursor)}
                 onMouseLeave={multiple(hideText, removeHighlightEffect)}
             >
-                <div className="icon-wrapper">
-                    <span className="icon-description">Projects</span>
-                    <Icon
-                        onClick={multiple(
-                            isOpen ? showText : hideText,
-                            updater
-                        )}
-                    />
-                </div>
+                <span className="icon-description">Projects</span>
+                <Icon
+                    onClick={multiple(isOpen ? showText : hideText, updater)}
+                />
             </IconStyles>
-            <FloatingText />
+            {!isOpen && <FloatingText />}
         </>
     );
 }

@@ -8,26 +8,22 @@ import {
 import { multiple } from '../utils/utils';
 
 var SocialStyles = styled.div`
-    padding: 0;
+    position: absolute;
     bottom: 0;
     left: 50%;
-    position: absolute;
+    transform: translateX(-60%);
 
     ul {
-        transform: translateX(-60%);
         display: flex;
-        gap: 1rem;
         align-items: center;
         padding-bottom: 1rem;
     }
 
     li {
+        margin: 0 0.5rem;
         transform-origin: center;
-        text-align: center;
         transform: rotate(-30deg);
         color: var(--lightgray);
-        width: 2rem;
-        padding: 1rem;
         transition: 50ms;
         &:hover {
             color: var(--primary);
@@ -41,17 +37,13 @@ var SocialStyles = styled.div`
         }
     }
 
-    @media (max-width: 768px) {
-        bottom: 2rem;
+    @media (max-width: 1024px) {
+        bottom: 1rem;
         ul {
-            gap: 2rem;
-            padding-bottom: 0rem;
             font-size: var(--fonts);
-
-            li {
-                width: auto;
-                padding: 0;
-            }
+        }
+        li {
+            margin: 0 1rem;
         }
     }
 `;

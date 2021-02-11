@@ -6,11 +6,8 @@ import {
 } from '../../utils/highlightCursor';
 
 var TextAreaStyles = styled.div`
-    width: 100%;
     textarea {
-        width: 90%;
-        display: inline-block;
-        margin: 0 auto;
+        width: 100%;
         resize: none;
         padding: 2rem 2rem;
         color: var(--darkgray);

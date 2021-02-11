@@ -1,16 +1,21 @@
 import { createGlobalStyle } from 'styled-components';
 
 export var IconStyles = createGlobalStyle`
-  .icon-corner {
-    display: contents;
-  }
+    svg {
+        font-size: 2rem;
+        color: var(--darkgray);
+        &:hover {
+            color: var(--primary);
+        }
+    }
 
   .icon-wrapper {
+    cursor: pointer;
     z-index: 1;
-    display: inline-flex;
+    display: flex;
     justify-content: center;
     align-items: center;
-    background-color: var(--white);
+    flex-direction: column;
     &:hover {
       * {
         color: var(--primary);
@@ -21,15 +26,12 @@ export var IconStyles = createGlobalStyle`
       display: none;
       text-transform: uppercase;
       font-weight: 300;
-      color: var(--primary);
-      margin-top: 1rem;
+      color: var(--lightgray);
       margin-bottom: .5rem;
       font-size: .8rem;
     }
     
     @media (max-width: 768px) {
-      flex-direction: column;
-      padding: 0;
       .icon-description {
         display: inline-block;
       }

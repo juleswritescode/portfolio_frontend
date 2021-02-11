@@ -10,7 +10,6 @@ import {
 } from '../../utils/highlightCursor';
 
 var FormStyles = styled.form`
-    padding: 0;
     padding-top: 3rem;
     padding-bottom: 4rem;
     animation: fadeInForm forwards ease-in;
@@ -34,11 +33,11 @@ var FormStyles = styled.form`
     .btn {
         display: inline-block;
         padding: 0.875rem 1.5rem;
-        background: transparent;
         border: 3px solid var(--gray);
         color: var(--gray);
+        background: transparent;
         box-shadow: var(--shadow-md);
-        margin-top: 1rem;
+        margin: 1rem 0;
         border-radius: 5px;
         font-size: var(--fontm);
         font-weight: 900;
@@ -52,7 +51,6 @@ var FormStyles = styled.form`
 
     .error,
     .success {
-        width: 100%;
         color: red;
         font-weight: 700;
         text-align: center;
@@ -75,11 +73,13 @@ var FormStyles = styled.form`
     }
 
     @media (max-width: 768px) {
-        padding-bottom: 6rem;
-        .btn {
+        .btn  {
             display: block;
             margin: 2rem auto;
         }
+    }
+    @media (max-width: 1024px) {
+        padding-bottom: 6rem;
     }
 `;
 

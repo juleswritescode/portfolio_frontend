@@ -4,17 +4,12 @@ import HeaderImage from '../images/header.png';
 
 var MessageStyles = styled.div`
     padding-top: 4rem;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;
-    width: auto;
 
     img {
         object-fit: contain;
-        width: clamp(100px, 100%, 950px);
-        min-width: 100px;
+        width: 100%;
     }
-    @media (max-width: 768px) {
+    @media (max-width: 767px) {
         display: none;
     }
 `;
@@ -22,7 +17,6 @@ var MessageStyles = styled.div`
 var MobileMessageStyles = styled.div`
     padding-top: 1.5rem;
     text-align: center;
-    width: 100%;
 
     h1,
     h2,
@@ -41,11 +35,10 @@ var MobileMessageStyles = styled.div`
 
     h1 {
         color: var(--black);
-        line-height: 1;
     }
 
     hr {
-        margin: 1rem 0;
+        margin: 1rem auto;
         opacity: 0.75;
         border: 0.5px solid var(--lightgray);
     }

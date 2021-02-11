@@ -9,17 +9,18 @@ import {
 } from '../utils/highlightCursor';
 
 var NodesStyles = styled.div`
-    padding-top: 3rem;
+    padding-top: 6rem;
     padding-bottom: 4rem;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 50px;
     justify-items: center;
-    align-items: center;
+    gap: 50px;
 
-    @media (max-height: 800px) {
-        padding-left: 1.5rem;
-        justify-items: flex-start;
+    @media (max-width: 768px) {
+        padding-top: 2rem;
+        padding-bottom: 8rem;
+        gap: 25px;
+        justify-items: center;
     }
 `;
 
@@ -27,22 +28,22 @@ var SingleNodeStyles = styled.div`
     animation: fadeInPreview forwards ease-in;
     animation-duration: ${({ idx }) => (idx + 1) * 200 + 'ms'};
     color: var(--darkgray);
-    max-width: 205px;
+    max-width: 200px;
 
     h4 {
         font-size: var(--fontl);
-        margin-bottom: 0;
         font-weight: 400;
     }
+
     p {
         font-size: var(--fonts);
-        margin: 0.5rem 0;
+        margin: 0.5rem 0 0 0;
     }
     .gatsby-image-wrapper {
         box-shadow: var(--shadow-md);
         width: 200px;
         height: 200px;
-        border-radius: 25px;
+        border-radius: 5px;
         margin-bottom: 1rem;
     }
 

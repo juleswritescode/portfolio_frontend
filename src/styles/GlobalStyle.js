@@ -15,11 +15,15 @@ export var GlobalStyle = createGlobalStyle`
         --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
     }
 
+    * {
+        box-sizing: border-box;
+    }
+
     html {
         font-size: 18px;
     }
 
-    @media (hover: hover) and (pointer: fine) {
+    @media (hover: hover) and (pointer: fine) and (min-width: 1024px) {
         * {
             cursor: none !important;
         }
@@ -27,9 +31,8 @@ export var GlobalStyle = createGlobalStyle`
     
     body {
         background-color: var(--white);
-        letter-spacing: 0.05rem;
         overflow-x: hidden;
-        margin-bottom: 0;
+        margin: 0;
         padding: 0;
     }
 
@@ -39,20 +42,12 @@ export var GlobalStyle = createGlobalStyle`
 
     a {
         text-decoration: none;
-        color: currentColor;
+        color: var(--lightgray);
         &:focus-visible {
             outline: 1px dashed var(--primary);
         }
     }
 
-    svg {
-        font-size: 2rem;
-        color: var(--darkgray);
-        &:hover {
-            color: var(--primary);
-        }
-    }
-    
     .gatsby-image-wrapper, img {
         user-select: none;
         -moz-user-select: none;

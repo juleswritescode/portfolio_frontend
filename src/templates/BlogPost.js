@@ -47,7 +47,7 @@ export default function BlogPost({ data = {} }) {
                 </span>
             </h2>
             <hr />
-            <div className="icon-wrapper">
+            <div className="icon">
                 <Link
                     to="/"
                     onMouseEnter={highlightCursor}
