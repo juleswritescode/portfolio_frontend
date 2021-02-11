@@ -23,23 +23,37 @@ var NodesStyles = styled.div`
         justify-items: center;
     }
 
-    .more-content {
-        height: 200px;
-        width: 200px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 5px;
-        background-color: var(--lightergray);
-        box-shadow: var(--shadow-md);
-        &:hover {
-            transform: scale(0.99);
-            box-shadow: none;
+    @keyframes fadeInPreview {
+        from {
+            opacity: 0;
+            transform: translateX(-50%);
         }
+        to {
+            opacity: 1;
+            transform: translateX(0%);
+        }
+    }
+`;
 
-        span {
-            color: var(--darkgray);
-        }
+var MoreBtn = styled.div`
+    height: 200px;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background-color: var(--lightergray);
+    box-shadow: var(--shadow-md);
+    animation: fadeInPreview forwards ease-in;
+    animation-duration: ${({ idx }) => (idx + 2) * 200 + 'ms'};
+
+    &:hover {
+        transform: scale(0.99);
+        box-shadow: none;
+    }
+
+    span {
+        color: var(--darkgray);
     }
 `;
 
@@ -58,6 +72,7 @@ var SingleNodeStyles = styled.div`
         font-size: var(--fonts);
         margin: 0.5rem 0 0 0;
     }
+
     .gatsby-image-wrapper {
         box-shadow: var(--shadow-md);
         width: 200px;
@@ -69,36 +84,34 @@ var SingleNodeStyles = styled.div`
             transform: scale(0.99);
         }
     }
-
-    @keyframes fadeInPreview {
-        from {
-            opacity: 0;
-            transform: translateX(-50%);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0%);
-        }
-    }
 `;
 
 export function NodesPreview({ nodes }) {
     return (
         <NodesStyles>
-            {nodes.slice(0, 3).map(function renderSingleNode(node, idx) {
+            {nodes.slice(0, 3).map(function renderSingleNode(node, idx, arr) {
                 return (
-                    <SingleNodePreview node={node} idx={idx} key={node.id} />
+                    <>
+                        <SingleNodePreview
+                            node={node}
+                            idx={idx}
+                            key={node.id}
+                        />
+                        {idx == arr.length - 1 && (
+                            <Link to="/content-overview">
+                                <MoreBtn
+                                    idx={idx}
+                                    onMouseLeave={removeHighlightEffect}
+                                    onMouseEnter={highlightCursor}
+                                    className="more-content"
+                                >
+                                    <span>See Overview...</span>
+                                </MoreBtn>
+                            </Link>
+                        )}
+                    </>
                 );
             })}
-            <Link to="/content-overview">
-                <div
-                    onMouseLeave={removeHighlightEffect}
-                    onMouseEnter={highlightCursor}
-                    className="more-content"
-                >
-                    <span>See Overview...</span>
-                </div>
-            </Link>
         </NodesStyles>
     );
 }

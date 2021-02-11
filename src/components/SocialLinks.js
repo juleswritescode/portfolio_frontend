@@ -9,11 +9,11 @@ import { multiple } from '../utils/utils';
 
 var SocialStyles = styled.div`
     position: absolute;
-    bottom: 0;
     left: 50%;
-    transform: translateX(-60%);
+    bottom: 0;
 
     ul {
+        transform: translateX(-60%);
         display: flex;
         align-items: center;
         padding-bottom: 1rem;
