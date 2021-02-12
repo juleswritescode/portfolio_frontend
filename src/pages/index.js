@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { Helmet } from 'react-helmet';
 // Components
 import { Contact } from '../components/Contact';
@@ -10,6 +10,8 @@ import { WelcomeMessage } from '../components/WelcomeMessage';
 import { NodesPreview } from '../components/NodesPreview';
 import { graphql } from 'gatsby';
 import { ContactForm } from '../components/contact-form/ContactForm';
+import { Context } from '../components/Context';
+
 import styled from 'styled-components';
 
 var IconStyles = styled.div`
@@ -29,9 +31,9 @@ var IconStyles = styled.div`
 `;
 
 export default function Index({ data = {} }) {
-    var [showProjects, setShowProjects] = useState(false);
-    var [showPosts, setShowPosts] = useState(false);
-    var [showContact, setShowContact] = useState(false);
+    var [{ showProjects, showContact, showPosts }, dispatch] = useContext(
+        Context
+    );
     var posts = data.allSanityPost?.nodes || [];
     var projects = data.allSanityProject?.nodes || [];
 
@@ -59,17 +61,11 @@ export default function Index({ data = {} }) {
     function updater(string) {
         return () => {
             if (string == 'posts') {
-                setShowPosts(o => !o);
-                setShowContact(false);
-                setShowProjects(false);
+                dispatch({ type: 'togglePosts' });
             } else if (string == 'projects') {
-                setShowProjects(o => !o);
-                setShowContact(false);
-                setShowPosts(false);
+                dispatch({ type: 'toggleProjects' });
             } else if (string == 'contact') {
-                setShowContact(o => !o);
-                setShowPosts(false);
-                setShowProjects(false);
+                dispatch({ type: 'toggleContact' });
             }
         };
     }

@@ -77,6 +77,7 @@ export default function ContentOverview({ data = {} }) {
                     {posts.map(function renderPostItem(post) {
                         return (
                             <Link
+                                key={post.id}
                                 to={`/post/${post.slug.current}`}
                                 onMouseEnter={highlightCursor}
                                 onMouseLeave={removeHighlightEffect}
@@ -103,6 +104,7 @@ export default function ContentOverview({ data = {} }) {
                     {projects.map(function renderProjectItem(project) {
                         return (
                             <Link
+                                key={project.id}
                                 to={`/project/${project.slug.current}`}
                                 onMouseEnter={highlightCursor}
                                 onMouseLeave={removeHighlightEffect}

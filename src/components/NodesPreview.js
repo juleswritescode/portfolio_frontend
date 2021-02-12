@@ -16,6 +16,10 @@ var NodesStyles = styled.div`
     justify-items: center;
     gap: 50px;
 
+    .fragment {
+        display: contents;
+    }
+
     @media (max-width: 768px) {
         padding-top: 2rem;
         padding-bottom: 8rem;
@@ -91,12 +95,8 @@ export function NodesPreview({ nodes }) {
         <NodesStyles>
             {nodes.slice(0, 3).map(function renderSingleNode(node, idx, arr) {
                 return (
-                    <>
-                        <SingleNodePreview
-                            node={node}
-                            idx={idx}
-                            key={node.id}
-                        />
+                    <div className="fragment" key={node.id}>
+                        <SingleNodePreview node={node} idx={idx} />
                         {idx == arr.length - 1 && (
                             <Link to="/content-overview">
                                 <MoreBtn
@@ -109,7 +109,7 @@ export function NodesPreview({ nodes }) {
                                 </MoreBtn>
                             </Link>
                         )}
-                    </>
+                    </div>
                 );
             })}
         </NodesStyles>

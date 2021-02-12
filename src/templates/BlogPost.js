@@ -49,13 +49,13 @@ export default function BlogPost({ data = {} }) {
             </h2>
             <hr />
             <div className="icon">
-                <Link
-                    to="/"
+                <a
+                    onClick={() => window.history.back()}
                     onMouseEnter={highlightCursor}
                     onMouseLeave={removeHighlightEffect}
                 >
                     <Icon />
-                </Link>
+                </a>
                 <Link
                     to="/content-overview"
                     onMouseEnter={highlightCursor}

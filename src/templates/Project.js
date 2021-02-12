@@ -19,6 +19,7 @@ export default function BlogPost({ data = {} }) {
                 <span className="links">
                     <a
                         target="_blank"
+                        rel="noreferrer"
                         onMouseEnter={highlightCursor}
                         onMouseLeave={removeHighlightEffect}
                         href={link}
@@ -27,6 +28,7 @@ export default function BlogPost({ data = {} }) {
                     </a>
                     <a
                         target="_blank"
+                        rel="noreferrer"
                         href={github}
                         onMouseEnter={highlightCursor}
                         onMouseLeave={removeHighlightEffect}
@@ -37,13 +39,13 @@ export default function BlogPost({ data = {} }) {
             </h2>
             <hr />
             <div className="icon">
-                <Link
-                    to="/"
+                <a
+                    onClick={() => window.history.back()}
                     onMouseEnter={highlightCursor}
                     onMouseLeave={removeHighlightEffect}
                 >
                     <Icon title="Back" />
-                </Link>
+                </a>
                 <Link
                     to="/content-overview"
                     onMouseEnter={highlightCursor}

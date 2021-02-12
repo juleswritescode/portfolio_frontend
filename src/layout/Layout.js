@@ -6,6 +6,7 @@ import 'normalize.css';
 import { MousePointer } from '../components/MousePointer';
 import { removeHighlightEffect } from '../utils/highlightCursor';
 import styled from 'styled-components';
+import { ContextProvider } from '../components/Context';
 
 var Wrapper = styled.div`
     width: clamp(100px, 90%, 950px);
@@ -19,12 +20,14 @@ var Wrapper = styled.div`
 export default function Layout({ children }) {
     useEffect(removeHighlightEffect);
     return (
-        <Wrapper>
-            <GlobalStyle />
-            <Typography />
-            <IconStyles />
-            <MousePointer />
-            {children}
-        </Wrapper>
+        <ContextProvider>
+            <Wrapper>
+                <GlobalStyle />
+                <Typography />
+                <IconStyles />
+                <MousePointer />
+                {children}
+            </Wrapper>
+        </ContextProvider>
     );
 }

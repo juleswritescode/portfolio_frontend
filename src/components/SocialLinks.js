@@ -61,17 +61,26 @@ export function SocialLinks() {
                 onMouseMove={updateTextPosition}
             >
                 <li>
-                    <a target="_blank" href="https://www.github.com/judocodes">
+                    <a
+                        target="_blank"
+                        href="https://www.github.com/judocodes"
+                        rel="noreferrer"
+                    >
                         ghub
                     </a>
                 </li>
                 <li>
-                    <a target="_blank" href="https://www.twitter.com/judocodes">
+                    <a
+                        target="_blank"
+                        href="https://www.twitter.com/judocodes"
+                        rel="noreferrer"
+                    >
                         twtr
                     </a>
                 </li>
                 <li>
                     <a
+                        rel="noreferrer"
                         target="_blank"
                         href="https://www.linkedin.com/in/judocodes"
                     >
